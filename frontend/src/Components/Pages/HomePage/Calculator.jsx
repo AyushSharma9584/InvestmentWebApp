@@ -35,8 +35,8 @@ const Calculator = () => {
     };
 
     return (
-        <div style={{ height: "461px", width: "657px" }} className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
-            <div style={{ width: "400px" }} className="bg-gray-800 p-8 rounded-lg shadow-lg w-80 text-center">
+        <div style={{ height: "461px" }} className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
+            <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-80 text-center">
                 <h1 className="text-2xl font-bold mb-4">Investment Calculator</h1>
                 <div className="calculator">
                     <label htmlFor="amount" className="block font-semibold mb-2">

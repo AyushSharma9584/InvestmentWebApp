@@ -65,7 +65,7 @@ export default function MakeEarnCard() {
           <div
 
             className="bg-gray-800 rounded-lg shadow-lg relative"
-            style={{ width: "700px", height: "500px", padding: "20px", opacity: "1" }} // Set opacity to 1 for full visibility
+            style={{ width: "700px", height: "500px", padding: "20px", opacity: "1", minWidth: "100px" }}
           >
 
             <button

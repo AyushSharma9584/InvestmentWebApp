@@ -21,7 +21,7 @@ const Home = () => {
         <Features />
         <WhyChoose />
       </Wrapper>
-      <Testimonial />
+      {/* <Testimonial /> */}
     </div>
   );
 };
