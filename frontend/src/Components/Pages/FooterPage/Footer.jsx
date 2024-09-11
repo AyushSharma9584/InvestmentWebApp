@@ -78,16 +78,16 @@ const Footer = () => {
             }}
             className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer"
           >
-            <FaFacebookF size={20} />
+            <a href="https://www.instagram.com/sarte.investments?igsh=dXQ0MmFrZmxzN2Nj" target="_blank" rel="noopener noreferrer"><FaInstagram size={20} /></a>
           </div>
           <div className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer">
-            <FaTwitter size={20} />
+            <a href="https://www.facebook.com/profile.php?id=61563795818355&mibextid=kFxxJD" target="_blank" rel="noopener noreferrer"><FaFacebookF size={20} /></a>
           </div>
           <div className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer">
             <FaYoutube size={20} />
           </div>
           <div className="w-10 h-10 rounded-full bg-white/[0.25] flex items-center justify-center text-black hover:bg-white/[0.5] cursor-pointer">
-            <FaInstagram size={20} />
+            <FaTwitter size={20} />
           </div>
         </div>
         {/* RIGHT END */}
