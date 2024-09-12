@@ -23,7 +23,7 @@ const Contact = () => {
             transition={{ ease: [0.22, 1, 0.36, 1], duration: 1.2 }}
           >
             {" "}
-            <h1 className="sm:text-5xl text-3xl">Contact</h1>
+            <h1 className="sm:text-5xl text-3xl mb-2">Contact</h1>
           </motion.span>
           <motion.span
             initial={{ width: 0, opacity: 0 }}
