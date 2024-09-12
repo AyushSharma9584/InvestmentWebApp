@@ -36,13 +36,7 @@ const Knowledge = () => {
             ></motion.span>
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-            possimus repudiandae maxime, consequuntur molestiae, esse rerum
-            culpa alias itaque necessitatibus sapiente tempore odio architecto,
-            aspernatur illum impedit id nemo praesentium! Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Expedita cum, nam voluptas dolore
-            enim blanditiis! Animi enim magni et eos corporis vero, suscipit
-            culpa unde accusamus, asperiores officia quod tenetur?
+            Cryptocurrency is a digital currency based on decentralized blockchain technology, allowing secure, transparent transactions without banks. Unlike traditional currencies, cryptocurrencies like Bitcoin and Ethereum are not controlled by central authorities, making them resistant to government interference and inflation. They use cryptography for security, verification, and creation of new units. Offering fast, global, and low-cost transactions, cryptocurrency is reshaping finance with new opportunities for investment and payments.
           </p>
         </div>
         <div className="mt-10">
@@ -65,35 +59,13 @@ const Knowledge = () => {
           </h1>
           <div className="flex flex-col gap-4 mb-4" >
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Dignissimos possimus repudiandae maxime, consequuntur molestiae,
-              esse rerum culpa alias itaque necessitatibus sapiente tempore odio
-              architecto, aspernatur illum impedit id nemo praesentium! Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Expedita cum,
-              nam voluptas dolore enim blanditiis! Animi enim magni et eos
-              corporis vero, suscipit culpa unde accusamus, asperiores officia
-              quod tenetur?
+              Cryptocurrency mining is the process of validating and adding new transactions to the blockchain ledger by solving complex mathematical problems, which also creates new units of the cryptocurrency.
             </p>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Dignissimos possimus repudiandae maxime, consequuntur molestiae,
-              esse rerum culpa alias itaque necessitatibus sapiente tempore odio
-              architecto, aspernatur illum impedit id nemo praesentium! Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Expedita cum,
-              nam voluptas dolore enim blanditiis! Animi enim magni et eos
-              corporis vero, suscipit culpa unde accusamus, asperiores officia
-              quod tenetur?
+
+              Cryptocurrency mining involves validating and recording new transactions on the blockchain by solving intricate mathematical puzzles. Miners use powerful computers to compete in solving these problems, ensuring the integrity and security of the blockchain network. As a reward for their efforts, miners earn newly created cryptocurrency units and transaction fees from the network. This process is crucial for maintaining the decentralized nature of cryptocurrencies, as it prevents double-spending and fraud while securing the network against malicious attacks. With the increasing complexity of mining algorithms, specialized hardware and significant computational power are often required to remain competitive in this field.
             </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Dignissimos possimus repudiandae maxime, consequuntur molestiae,
-              esse rerum culpa alias itaque necessitatibus sapiente tempore odio
-              architecto, aspernatur illum impedit id nemo praesentium! Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Expedita cum,
-              nam voluptas dolore enim blanditiis! Animi enim magni et eos
-              corporis vero, suscipit culpa unde accusamus, asperiores officia
-              quod tenetur?
-            </p>
+
           </div>
         </div>
       </Wrapper>

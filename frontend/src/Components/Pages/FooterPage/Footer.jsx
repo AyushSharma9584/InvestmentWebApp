@@ -14,8 +14,7 @@ const Footer = () => {
             <div className="font-oswald font-medium uppercase text-sm cursor-pointer">
               <h1 className=" text-2xl font-semibold">About</h1>
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim
-                corporis, maxime ullam ducimus similique recusandae deleniti!
+                At Sarte Infosoft & Solution, we are committed to offering innovative investment solutions and IT services that empower our clients to achieve financial security and growth. Our focus is on delivering transparent, secure, and personalized investment opportunities that cater to the diverse needs of individuals and businesses alike. We believe in creating a future where finances are managed with integrity and reliability, ensuring our clients earn passive income while securing a stable financial future.
               </p>
             </div>
           </div>

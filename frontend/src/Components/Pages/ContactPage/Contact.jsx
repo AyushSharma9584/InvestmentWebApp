@@ -39,7 +39,16 @@ const Contact = () => {
             transition={{ ease: [0.22, 1, 0.36, 1], duration: 1.2 }}
             className="sm:text-xl font-semibold"
           >
-            Address - PLot no. K-36 , near india gate Radisson square vijay nagar Indore Madhya Pradesh 452010
+            <span className="text-[#18dae4]">Address - </span>PLot no. K-36 , near india gate Radisson square vijay nagar Indore Madhya Pradesh 452010
+          </motion.p>
+          <motion.p
+            initial={{ y: "70%", opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ ease: [0.22, 1, 0.36, 1], duration: 1.2 }}
+            className="sm:text-xl font-semibold mt-1"
+          >
+            <span className="text-[#18dae4]">Customer care no. -</span>  7649825240
           </motion.p>
         </div>
         <ContactInput />
