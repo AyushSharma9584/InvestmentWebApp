@@ -50,7 +50,7 @@ const ContactInput = () => {
               name="subject"
               required
               className="input"
-              placeholder="your Subject"
+              placeholder="your Number"
             />
             <textarea
               className="input overflow-y-auto overflow-x-hidden"

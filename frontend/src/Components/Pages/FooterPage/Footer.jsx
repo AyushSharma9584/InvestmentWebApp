@@ -10,7 +10,7 @@ const Footer = () => {
         {/* LEFT START */}
         <div className="flex gap-[50px] md:gap-[75px] lg:gap-[100px] flex-col md:flex-row">
           {/* MENU START */}
-          <div className="flex flex-col gap-3 shrink-1 md:w-[35%]">
+          <div className="flex flex-col gap-3 shrink-1 md:w-[70%]">
             <div className="font-oswald font-medium uppercase text-sm cursor-pointer">
               <h1 className=" text-2xl font-semibold">About</h1>
               <p>
@@ -20,9 +20,9 @@ const Footer = () => {
           </div>
           {/* MENU END */}
 
-          {/* NORMAL MENU START */}
+          {/*   
           <div className="flex gap-[50px] md:gap-[75px] lg:gap-[100px] shrink-0">
-            {/* MENU START */}
+      
             <div className="flex flex-col gap-3">
               <div className="font-oswald font-medium uppercase">
                 <h1>get help</h1>
@@ -43,9 +43,9 @@ const Footer = () => {
                 Contact Us
               </div>
             </div>
-            {/* MENU END */}
+         
 
-            {/* MENU START */}
+     
             <div className="flex flex-col gap-3">
               <div className="font-oswald font-medium uppercase text-sm">
                 About Sarte
@@ -63,11 +63,11 @@ const Footer = () => {
                 Sustainability
               </div>
             </div>
-            {/* MENU END */}
-          </div>
-          {/* NORMAL MENU END */}
+         
+          </div> */}
+
         </div>
-        {/* LEFT END */}
+
 
         {/* RIGHT START */}
         <div className="flex gap-4 justify-center md:justify-start">
@@ -101,10 +101,10 @@ const Footer = () => {
         {/* RIGHT START */}
 
         <div className="flex gap-2 md:gap-5 text-center md:text-left flex-wrap justify-center">
-          <div className=" font-semibold text-white/[0.5] hover:text-white cursor-pointer">
+          {/* <div className=" font-semibold text-white/[0.5] hover:text-white cursor-pointer">
             Guides
-          </div>
-          <div className="font-semibold text-white/[0.5] hover:text-white cursor-pointer">
+          </div> */}
+          <div className="font-semibold text-white/[0.5] hover:text-white cursor-pointer mr-3">
             <TermModal />
           </div>
           <div className=" font-semibold text-white/[0.5] hover:text-white cursor-pointer">

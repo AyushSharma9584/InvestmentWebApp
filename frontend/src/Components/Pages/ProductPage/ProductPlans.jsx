@@ -28,7 +28,7 @@ const ProductPlans = () => {
           transition={{ ease: [0.22, 1, 0.36, 1], duration: 1.2 }}
           className="sm:text-2xl font-semibold"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, eveniet?
+          Choose from our easy investment plans and enjoy guaranteed returns for your financial growth.
         </motion.p>
       </div>
       <MakeEarnCard />

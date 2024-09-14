@@ -102,7 +102,6 @@ const ProductService = () => {
           </div>
         </div>
       </div>
-        <p className="mt-10 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut expedita obcaecati sapiente vitae voluptatibus. Voluptatibus, nulla sint voluptates deleniti libero fugit incidunt quis, sapiente ullam et, hic praesentium recusandae quasi? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus numquam ea ratione optio, molestias laudantium autem rerum quibusdam odit unde vero placeat temporibus eum animi aperiam cupiditate corporis tempore id?</p>
     </div>
   );
 }
