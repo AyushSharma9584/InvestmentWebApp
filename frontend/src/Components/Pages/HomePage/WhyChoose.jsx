@@ -53,15 +53,20 @@ const WhyChoose = () => {
           <CardRotate pics={['card_img4.jpg', 'card_img5.jpg', 'card_img6.jpg']} />
         </div>
         <div className="lg:hidden block">
-          <h2 className="lg:text-4xl sm:text-3xl text-2xl font-semibold mb-5 -mt-40">
+          {/* <h2 className="lg:text-4xl sm:text-3xl text-2xl font-semibold mb-5 -mt-40">
             Trusted Over 4000+ Clients
-          </h2>
+          </h2> */}
           <p className="mb-10">
-            Welcome to Marvellous Mining, where your financial goals become our
-            priority. As a leading investment management service, we specialize
-            in delivering exceptional investment experiences tailored to your
-            needs. With a commitment to integrity and responsibility, we handle
-            your hard-earned money with the utmost care.
+            Welcome to Sarte Infosoft & Solution, where your financial
+            aspirations are our foremost concern. As a premier investment
+            management service, we excel in providing outstanding investment
+            experiences tailored to your unique requirements. With a steadfast
+            commitment to integrity and accountability, we manage your
+            Investment Amount with exceptional care. We don’t just make
+            promises; we deliver results, focusing relentlessly on the growth of
+            your investments. At Sarte Infosoft & Solution, we view ourselves as
+            a family, dedicated to supporting and nurturing your financial
+            journey every step of the way.
           </p>
           <div className="mb-5 sm:text-2xl text-xs">
             <p>🗸 Professionally Loaded Team</p>

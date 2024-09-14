@@ -43,11 +43,12 @@ const ProductDesTwo = () => {
       <div className='lg:block  hidden'>
         <div className="mr-2 flex flex-col gap-5 sm:mt-0 -mt-40 ">
           <h1 className=" text-[#18dae4] font-semibold text-3xl lg:mb-3 mt-4">
-            Advance Plan (Fixed Return, High Investment):
+            Intermediate Plan :  <span className="text-white font-light text-xl s:ml-0 md:ml-3">Balanced Investment, Higher Returns
+            </span>
+
           </h1>
           <p className=" font-light">
-            This plan is tailored for those looking to invest a larger amount for greater returns. With the highest interest rate among all plans, the Advance Plan guarantees fixed returns, making it an excellent option for investors aiming for maximum financial growth.
-          </p>
+            The Intermediate Plan is designed for those ready to invest between ₹60,000 and ₹2,99,999. Offering a higher annual interest rate of 42%, this plan is ideal for investors seeking stable and substantial returns without the worry of market fluctuations. Your one-time investment works for you, providing a consistent stream of income over time. With no need for continuous updates or adjustments, you can enjoy a stress-free experience. This plan is 100% safe and secure, ensuring that your money is protected and that you earn a passive income with zero risks involved. Sarte Infosoft & Solution delivers a reliable financial growth opportunity tailored to your needs.          </p>
         </div>
       </div>
       <div className="sm:-mt-40 -mt-10">
@@ -57,15 +58,17 @@ const ProductDesTwo = () => {
       <div className='lg:hidden block'>
         <div className="mr-2 flex flex-col gap-5 sm:mt-0 -mt-40 ">
           <h1 className=" text-[#18dae4] font-semibold text-3xl lg:mb-3 mt-4">
-            Advance Plan (Fixed Return, High Investment):
+            Intermediate Plan :  <span className="text-white font-light text-xl s:ml-0 md:ml-3">Balanced Investment, Higher Returns
+            </span>
+
           </h1>
 
           <p className=" font-light">
-            This plan is tailored for those looking to invest a larger amount for greater returns. With the highest interest rate among all plans, the Advance Plan guarantees fixed returns, making it an excellent option for investors aiming for maximum financial growth.
-          </p>
+            The Intermediate Plan is designed for those ready to invest between ₹60,000 and ₹2,99,999. Offering a higher annual interest rate of 42%, this plan is ideal for investors seeking stable and substantial returns without the worry of market fluctuations. Your one-time investment works for you, providing a consistent stream of income over time. With no need for continuous updates or adjustments, you can enjoy a stress-free experience. This plan is 100% safe and secure, ensuring that your money is protected and that you earn a passive income with zero risks involved. Sarte Infosoft & Solution delivers a reliable financial growth opportunity tailored to your needs.          </p>
+
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

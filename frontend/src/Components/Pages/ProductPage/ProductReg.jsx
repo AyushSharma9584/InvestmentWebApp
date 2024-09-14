@@ -29,7 +29,7 @@ const ProductReg = () => {
       <p className="sm:text-2xl font-semibold mt-5">
         Each of our plans ensures that your investment is protected, offering a fixed, reliable income stream without any risks or hidden fees. Choose the plan that fits your financial goals, and let Sarte Infosoft & Solution help you secure a prosperous future.
       </p>
-      <div className="mr-2  gap-5 mb-4 ">
+      {/* <div className="mr-2  gap-5 mb-4 ">
         <h1 className=" text-[#18dae4] font-semibold text-3xl mb-2  mt-4">
           Primary Plan : <span className="text-white font-light text-xl s-ml-0 md:ml-3">Start Small, Grow Big with Fixed Returns</span>
         </h1>
@@ -58,7 +58,7 @@ const ProductReg = () => {
         <button className="bg-[#18dae4] text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95 mt-10">
           Registration
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
