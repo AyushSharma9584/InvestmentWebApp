@@ -23,7 +23,7 @@ const Contact = () => {
             transition={{ ease: [0.22, 1, 0.36, 1], duration: 1.2 }}
           >
             {" "}
-            <h1 className="sm:text-5xl text-3xl">Contact</h1>
+            <h1 className="sm:text-5xl text-3xl ">Contact</h1>
           </motion.span>
           <motion.span
             initial={{ width: 0, opacity: 0 }}
@@ -37,7 +37,7 @@ const Contact = () => {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ ease: [0.22, 1, 0.36, 1], duration: 1.2 }}
-            className="sm:text-xl font-semibold"
+            className="sm:text-xl font-semibold  mt-2"
           >
             <span className="text-[#18dae4]">Address - </span>PLot no. K-36 , near india gate Radisson square vijay nagar Indore Madhya Pradesh 452010
           </motion.p>
