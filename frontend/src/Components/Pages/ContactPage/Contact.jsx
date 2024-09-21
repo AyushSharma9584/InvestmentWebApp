@@ -48,6 +48,15 @@ const Contact = () => {
             transition={{ ease: [0.22, 1, 0.36, 1], duration: 1.2 }}
             className="sm:text-xl font-semibold mt-1"
           >
+            <span className="text-[#18dae4]">Email -</span>  Supportsarteinfomining.com
+          </motion.p>
+          <motion.p
+            initial={{ y: "70%", opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ ease: [0.22, 1, 0.36, 1], duration: 1.2 }}
+            className="sm:text-xl font-semibold mt-1"
+          >
             <span className="text-[#18dae4]">Customer care no. -</span>  7649825240
           </motion.p>
         </div>

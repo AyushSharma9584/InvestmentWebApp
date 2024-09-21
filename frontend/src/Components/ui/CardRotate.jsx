@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 export const CardRotate = ({ pics = [] }) => {
   return (
-    <section className="relative grid min-h-screen w-full place-content-start overflow-hidden md:mt-0 -mt-40">
+    <section className="relative grid min-h-screen w-full place-content-start overflow-hidden md:mt-0 -mt-20">
       <Cards pics={pics} />
     </section>
   );
@@ -15,24 +15,24 @@ const Cards = ({ pics = [] }) => {
   const containerRef = useRef(null);
 
   return (
-    <div className="absolute inset-0 z-10" ref={containerRef}>
+    <div className="absolute inset-0 z-10 h-[600px] md:h-auto mt-[100px]" ref={containerRef}>
       <Card
         containerRef={containerRef}
         src={pics[0]}
         alt="Example image"
         rotate="6deg"
-        top="20%"
-        left="5%"
-        className="w-36 md:w-72"
+        top="23%"
+        left="1%"
+        className="w-[240px] md:w-72"
       />
       <Card
         containerRef={containerRef}
         src={pics[1]}
         alt="Example image"
         rotate="12deg"
-        top="45%"
-        left="50%"
-        className="w-24 md:w-52"
+        top="50%"
+        left="30%"
+        className="w-[220px] md:w-52"
       />
       <Card
         containerRef={containerRef}
@@ -41,7 +41,7 @@ const Cards = ({ pics = [] }) => {
         rotate="-6deg"
         top="20%"
         left="40%"
-        className="w-52 md:w-80"
+        className="w-[230px] md:w-80"
       />
 
     </div>
