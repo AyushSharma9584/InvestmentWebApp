@@ -190,7 +190,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                     Electronic Communication
                   </h1>
                   <p className=" font-light mb-8">
-                    You agree to receive communications electronically. For any queries, email us at Supportsarteinfomining.com
+                    You agree to receive communications electronically. For any queries, email us at Support@sarteinfomining.com
                     .
 
                   </p>
