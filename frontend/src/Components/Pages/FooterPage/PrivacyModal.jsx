@@ -245,7 +245,7 @@ const SpringModal = ({ isOpen, setIsOpen }) => {
                   </p>
                   <p className=" font-light mb-4">
 
-                    - Email : Supportsarteinfomining.com<br />
+                    - Email : Support@sarteinfomining.com<br />
                     - Contact Page : https://sarteinfomining.com
 
                   </p>
