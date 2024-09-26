@@ -1,6 +1,6 @@
 import React from 'react'
 import { CardRotate } from '../../ui/CardRotate';
-import blog_img4 from '../../../assets/blog/blog_img4.jpg'
+import Blog_img4 from '../../../assets/blog/blog_img4.jpg'
 import Blog_img5 from '../../../assets/blog/Blog_img5.jpg'
 import Blog_img6 from '../../../assets/blog/Blog_img6.jpg'
 
@@ -52,7 +52,7 @@ const BlogDesTwo = () => {
                 </p>
             </div>
             <div className="">
-                <CardRotate pics={[blog_img4, Blog_img6, Blog_img5]} />
+                <CardRotate pics={[Blog_img5, Blog_img6, Blog_img4]} />
             </div>
             <div className="lg:hidden block -mt-36">
                 <h1 className=" text-[#18dae4] font-semibold text-3xl lg:mb-3 mt-4">

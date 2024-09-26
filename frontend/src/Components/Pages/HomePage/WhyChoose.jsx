@@ -50,7 +50,7 @@ const WhyChoose = () => {
           </button>
         </div>
         <div className="">
-          <CardRotate pics={['card_img4.jpg', 'card_img5.jpg', 'card_img6.jpg']} />
+          <CardRotate pics={['card_img4.jpg', 'card_img6.jpg', 'card_img5.jpg']} />
         </div>
         <div className="lg:hidden block">
           {/* <h2 className="lg:text-4xl sm:text-3xl text-2xl font-semibold mb-5 -mt-40">

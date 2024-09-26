@@ -1,10 +1,13 @@
 import { CardRotate } from "../../ui/CardRotate";
+import inter_1 from '../../../assets/product/inter_1.jpg'
+import inter_2 from '../../../assets/product/inter_2.jpg'
+import inter_3 from '../../../assets/product/inter_3.jpg'
 
 const ProductDesThree = () => {
   return (
-    <div className="mt-[5em] w-full grid lg:grid-cols-2 grid-cols-1 lg:-mt-16">
+    <div className="mt-[0em] lg:mt-[5em] w-full grid lg:grid-cols-2 grid-cols-1 lg:-mt-[-40px]">
       <div className="sm:-mt-40 -mt-10">
-        <CardRotate />
+        <CardRotate pics={[inter_2, inter_3, inter_1]} />
       </div>
       <div className="mr-2 flex flex-col gap-5 sm:mt-0 -mt-40">
         <h1 className=" text-[#18dae4] font-semibold text-3xl lg:mb-3 mt-4">

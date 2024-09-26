@@ -23,7 +23,7 @@ const Cards = ({ pics = [] }) => {
         rotate="6deg"
         top="23%"
         left="1%"
-        className="w-[240px] md:w-72"
+        className="w-[240px] md:w-[400px]"
       />
       <Card
         containerRef={containerRef}
@@ -32,7 +32,7 @@ const Cards = ({ pics = [] }) => {
         rotate="12deg"
         top="50%"
         left="30%"
-        className="w-[220px] md:w-52"
+        className="w-[220px] md:w-[300px]"
       />
       <Card
         containerRef={containerRef}
@@ -41,7 +41,7 @@ const Cards = ({ pics = [] }) => {
         rotate="-6deg"
         top="20%"
         left="40%"
-        className="w-[230px] md:w-80"
+        className="w-[230px] md:w-[350px]"
       />
 
     </div>

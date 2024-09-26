@@ -1,4 +1,7 @@
 import { CardRotate } from '../../ui/CardRotate';
+import Adv_1 from '../../../assets/product/Adv_1.jpg'
+import Adv_2 from '../../../assets/product/Adv_2.jpg'
+import Adv_3 from '../../../assets/product/Adv_3.jpg'
 
 const ProductDesTwo = () => {
   return (
@@ -36,7 +39,7 @@ const ProductDesTwo = () => {
     //   </div>
     // </div>
 
-    <div className="mt-[5em] w-full grid lg:grid-cols-2 grid-cols-1 lg:-mt-16">
+    <div className="mt-[0em]  lg:mt-[5em] w-full grid lg:grid-cols-2 grid-cols-1 lg:-mt-16">
       {/* <div className="sm:-mt-40 -mt-10">
         <CardRotate />
       </div> */}
@@ -51,12 +54,12 @@ const ProductDesTwo = () => {
             The Intermediate Plan is designed for those ready to invest between ₹60,000 and ₹2,99,999. Offering a higher annual interest rate of 42%, this plan is ideal for investors seeking stable and substantial returns without the worry of market fluctuations. Your one-time investment works for you, providing a consistent stream of income over time. With no need for continuous updates or adjustments, you can enjoy a stress-free experience. This plan is 100% safe and secure, ensuring that your money is protected and that you earn a passive income with zero risks involved. Sarte Infosoft & Solution delivers a reliable financial growth opportunity tailored to your needs.          </p>
         </div>
       </div>
-      <div className="sm:-mt-40 -mt-10">
-        <CardRotate />
+      <div className="sm:-mt-[260px] -mt-10">
+        <CardRotate pics={[Adv_3, Adv_1, Adv_2]} />
       </div>
 
-      <div className='lg:hidden block'>
-        <div className="mr-2 flex flex-col gap-5 sm:mt-0 -mt-40 ">
+      <div className='lg:hidden block mt-[4em] lg:mt-[0em]'>
+        <div className="mr-2 flex flex-col gap-5 sm:mt-[200px] -mt-40 ">
           <h1 className=" text-[#18dae4] font-semibold text-3xl lg:mb-3 mt-4">
             Intermediate Plan :  <span className="text-white font-light text-xl s:ml-0 md:ml-3">Balanced Investment, Higher Returns
             </span>

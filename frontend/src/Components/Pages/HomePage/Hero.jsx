@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import hero1 from "../../../assets/home/hero1.jpg"
-import hero2 from "../../../assets/home/hero2.jpg"
-import hero3 from "../../../assets/home/hero3.jpg"
-import hero4 from "../../../assets/home/hero4.jpg"
+import hero1 from "../../../assets/home/Home_img1.jpg"
+import hero2 from "../../../assets/home/Home_img2.jpg"
+import hero3 from "../../../assets/home/Home_img3.jpg"
+import hero4 from "../../../assets/home/Home_img4.jpg"
 
 const Hero = () => {
   return (

@@ -1,10 +1,13 @@
 import { CardRotate } from '../../ui/CardRotate';
+import Pri_1 from '../../../assets/product/Pri_1.jpg'
+import Pri_2 from '../../../assets/product/Pri_2.jpg'
+import Pri_3 from '../../../assets/product/Pri_3.jpg'
 
 const ProductDesOne = () => {
   return (
-    <div className="mt-[6em] w-full grid lg:grid-cols-2 grid-cols-1">
+    <div className="lg:mt-[6em] mt-[0em]  w-full grid lg:grid-cols-2 grid-cols-1">
       <div className="sm:-mt-40 -mt-10">
-        <CardRotate />
+        <CardRotate pics={[Pri_3, Pri_1, Pri_2]} />
       </div>
       <div className="mr-2 flex flex-col gap-5 sm:mt-0 -mt-40">
         <h1 className=" text-[#18dae4] font-semibold text-3xl lg:mb-3 mt-4">
