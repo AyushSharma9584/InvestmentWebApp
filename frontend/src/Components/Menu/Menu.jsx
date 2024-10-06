@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { FiAlertCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
@@ -8,12 +10,19 @@ import Wrapper from "../Wrapper";
 import sarteLogo from "../../assets/sarte.png";
 import MenuMobile from "./MenuMobile";
 import MenuDesktop from "./MenuDesktop";
+import SignUp from "../Pages/SignupPage/SignUp";
 
 const Menu = () => {
+  const dropdownRef = useRef(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [isView, setIsView] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   const [show, setShow] = useState("translate-y-0");
   const [lastScrollY, setLastScrollY] = useState(0);
+  const iconRef = useRef(null);
 
   const controllerBar = () => {
     if (window.scrollY > 300) {
@@ -33,55 +42,228 @@ const Menu = () => {
     return () => window.removeEventListener("scroll", controllerBar);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Close dropdown if click is outside the dropdown and icon
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        iconRef.current &&
+        !iconRef.current.contains(event.target)
+      ) {
+        setToggle(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef, iconRef]);
+
   return (
-    <nav
-      className={`menu w-full h-[60px] md:h-[80px] bg-[#141314] flex items-center justify-between z-[999] sticky top-0 transition-transform duration-300 ${show}`}
-    >
-      <Wrapper className="h-[60px] flex items-center justify-between">
-        <Link to="/">
-          <img
-            className="w-[60px] md:w-[100px]"
-            src={sarteLogo}
-            alt="Sarte Logo"
-          />
-        </Link>
-
-        <MenuDesktop
-          showCatMenu={showCatMenu}
-          setShowCatMenu={setShowCatMenu}
-        />
-
-        {mobileMenu && (
-          <MenuMobile
-            showCatMenu={showCatMenu}
-            setShowCatMenu={setShowCatMenu}
-            setMobileMenu={setMobileMenu}
-          />
-        )}
-
-        <div className="flex items-center gap-2">
-          <Link to="#">
-            <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center cursor-pointer hover:bg-black/[0.05] relative">
-              <GoPerson className="text-[15px] md:text-[20px]" />
-            </div>
+    <>
+      <nav
+        className={`menu w-full h-[60px] md:h-[80px] bg-[#141314] flex items-center justify-between z-[999] sticky top-0 transition-transform duration-300 ${show}`}
+      >
+        <Wrapper className="h-[60px] flex items-center justify-between">
+          <Link to="/">
+            <img
+              className="w-[60px] md:w-[100px]"
+              src={sarteLogo}
+              alt="Sarte Logo"
+            />
           </Link>
 
-          <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex md:hidden justify-center items-center cursor-pointer hover:bg-black/[0.05] relative -mr-2">
-            {mobileMenu ? (
-              <VscChromeClose
-                className="text-[20px]"
-                onClick={() => setMobileMenu(false)}
-              />
-            ) : (
-              <BiMenuAltRight
-                className="text-[22px]"
-                onClick={() => setMobileMenu(true)}
-              />
-            )}
+          <MenuDesktop
+            showCatMenu={showCatMenu}
+            setShowCatMenu={setShowCatMenu}
+          />
+
+          {mobileMenu && (
+            <MenuMobile
+              showCatMenu={showCatMenu}
+              setShowCatMenu={setShowCatMenu}
+              setMobileMenu={setMobileMenu}
+            />
+          )}
+
+          <div className="flex items-center gap-2 relative">
+            <div >
+
+              <div ref={iconRef} className="w-8 md:w-12 h-8 md:h-12 rounded-full flex justify-center items-center cursor-pointer hover:bg-black/[0.05] ">
+                <GoPerson onClick={() => setToggle(!toggle)} className="text-[15px] md:text-[20px]" />
+              </div>
+
+
+              {
+                toggle &&
+                <div ref={dropdownRef} className="origin-top-right absolute right-0 mt-1 py-3 w-[120px] h-auto bg-neutral-800 rounded-md shadow-lg text-center">
+                  <h1 onClick={() => setIsOpen(!isOpen)} className="cursor-pointer mb-1 hover:text-[#18dae4]">Signup</h1>
+                  <h1 onClick={() => setIsView(!isOpen)} className="cursor-pointer hover:text-[#18dae4]">Login</h1>
+
+                </div>
+
+              }
+
+            </div>
+
+            <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex md:hidden justify-center items-center cursor-pointer hover:bg-black/[0.05] relative -mr-2">
+              {mobileMenu ? (
+                <VscChromeClose
+                  className="text-[20px]"
+                  onClick={() => setMobileMenu(false)}
+                />
+              ) : (
+                <BiMenuAltRight
+                  className="text-[22px]"
+                  onClick={() => setMobileMenu(true)}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      </Wrapper>
-    </nav>
+        </Wrapper>
+      </nav>
+
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+            className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-[999] grid place-items-center overflow-y-scroll cursor-pointer"
+          >
+            <motion.div
+              initial={{ scale: 0, rotate: "12.5deg" }}
+              animate={{ scale: 1, rotate: "0deg" }}
+              exit={{ scale: 0, rotate: "0deg" }}
+              onClick={(e) => e.stopPropagation()}
+              style={{ border: "1px solid #18dae4" }}
+              className="bg-[#100f10] text-white px-6 rounded-lg  md:w-[30%] shadow-xl cursor-default relative text-start overflow-auto h-[70vh]"
+            >
+              <div className="relative z-10">
+                <img src="sarte.png" className="w-[110px] h-[110px] m-auto" />
+                <h3 className="text-3xl font-bold text-center mb-2">
+                  SignUp
+                </h3>
+                <div>
+                  <div className="mr-2 flex flex-col  sm:mt-0 ">
+                    <div class="space-y-6">
+                      <div>
+                        <label class="text-white text-sm mb-2 block">Email Id</label>
+                        <input name="email" type="text" class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter email" />
+                      </div>
+                      <div>
+                        <label class="text-white text-sm mb-2 block">Create Password</label>
+                        <input name="password" type={showPassword ? "text" : "password"} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
+
+                        <input
+                          id="check"
+                          className="mt-3"
+                          type="checkbox"
+                          value={showPassword}
+                          onChange={() =>
+                            setShowPassword((prev) => !prev)
+                          }
+                        />
+                        <label className="text-[13px] ml-2" for="check">Show Password</label>
+                      </div>
+
+                    </div>
+
+                    <div class="!mt-12">
+                      <div className="flex gap-2  justify-center">
+                        <button
+                          onClick={() => setIsOpen(false)}
+                          className="bg-[#18dae4] transition-all hover:bg-[#0b9198]  text-black hover:text-white font-semibold  py-2 rounded w-60"
+                        >
+                          SignUp
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
+
+      <AnimatePresence>
+        {isView && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsView(false)}
+            className="bg-slate-900/20 backdrop-blur p-8 fixed inset-0 z-[999] grid place-items-center overflow-y-scroll cursor-pointer"
+          >
+            <motion.div
+              initial={{ scale: 0, rotate: "12.5deg" }}
+              animate={{ scale: 1, rotate: "0deg" }}
+              exit={{ scale: 0, rotate: "0deg" }}
+              onClick={(e) => e.stopPropagation()}
+              style={{ border: "1px solid #18dae4" }}
+              className="bg-[#100f10] text-white px-6 rounded-lg  md:w-[30%] shadow-xl cursor-default relative text-start overflow-auto h-[70vh]"
+            >
+              <div className="relative z-10">
+                <img src="sarte.png" className="w-[110px] h-[110px] m-auto" />
+                <h3 className="text-3xl font-bold text-center mb-2">
+                  Login
+                </h3>
+                <div>
+                  <div className="mr-2 flex flex-col  sm:mt-0 ">
+                    <div class="space-y-6">
+                      <div>
+                        <label class="text-white text-sm mb-2 block">Email Id</label>
+                        <input name="email" type="text" class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter email" />
+                      </div>
+                      <div>
+                        <label class="text-white text-sm mb-2 block">Password</label>
+                        <input name="password" type={showPassword ? "text" : "password"} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
+
+                        <input
+                          id="check"
+                          className="mt-3"
+                          type="checkbox"
+                          value={showPassword}
+                          onChange={() =>
+                            setShowPassword((prev) => !prev)
+                          }
+                        />
+                        <label className="text-[13px] ml-2" for="check">Show Password</label>
+                      </div>
+
+                    </div>
+
+                    <div class="!mt-12">
+                      <div className="flex gap-2  justify-center">
+                        <button
+                          onClick={() => setIsView(false)}
+                          className="bg-[#18dae4] transition-all hover:bg-[#0b9198]  text-black hover:text-white font-semibold  py-2 rounded w-60"
+                        >
+                          Login
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
+
+
+
+    </>
   );
 };
 

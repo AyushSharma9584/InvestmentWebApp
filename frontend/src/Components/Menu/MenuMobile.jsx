@@ -7,8 +7,8 @@ const MenuMobile = ({ setMobileMenu }) => {
     { id: 2, name: "Blog", url: "/blog" },
     { id: 3, name: "Product", url: "/products" },
     { id: 4, name: "Contact-Us", url: "/contact-us" },
-    { id: 5, name: "Knowledge", url: "/knowledge" },
-    { id: 6, name: "SignUp", url: "/create-user" },
+    { id: 5, name: "Knowledge", url: "/knowledge" }
+    // { id: 6, name: "SignUp", url: "/create-user" },
   ];
 
   return (
@@ -20,8 +20,7 @@ const MenuMobile = ({ setMobileMenu }) => {
             to={item.url}
             onClick={() => setMobileMenu(false)}
             className={({ isActive }) =>
-              `hover:bg-white/[0.09] rounded-md cursor-pointer py-4 px-5 ${
-                isActive ? "text-[#0aa5cc]" : ""
+              `hover:bg-white/[0.09] rounded-md cursor-pointer py-4 px-5 ${isActive ? "text-[#0aa5cc]" : ""
               }`
             }
           >
