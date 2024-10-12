@@ -9,7 +9,7 @@ const addProduct = async (data) => {
         if (!result) {
             return { status: 400, message: "Failed to add product" };
         }
-        return { status: 200, message: "Product added successfully", data: result };
+        return { status: 200, message: "Product added successfully!!", data: result };
     } catch (error) {
         throw error
     }

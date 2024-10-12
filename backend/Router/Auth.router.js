@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const AuthController = require('../Controller/Auth.controller')
 
-router.post('/signup', async (req, res) => {
+router.post(' /signup', async (req, res) => {
     try {
         const result = await AuthController.SignupController(req, res);
         // return res.status(200).json(result)
@@ -20,7 +20,7 @@ router.post('/login', async (req, res) => {
 
     } catch (error) {
         console.log("error in router " + error)
-        return res.status(400).json({ error: "internal server error router" })
+        return res.status(400).json({ error: "internal server error routerr" })
 
     }
 })
