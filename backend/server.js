@@ -5,9 +5,9 @@ const dotenv = require('dotenv')
 dotenv.config();
 const PORT = process.env.PORT
 
-// app.use('/', (req, res) => {
-//     res.send("Heyy!!! I think you hit wrong route...")
-// })
+app.use('/', (req, res) => {
+    res.send("Heyy!!! I think you hit wrong route...")
+})
 
 const startServer = async () => {
     app.listen(PORT, () => {
