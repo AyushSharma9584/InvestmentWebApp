@@ -10,6 +10,8 @@ import Wrapper from "../Wrapper";
 import sarteLogo from "../../assets/sarte.png";
 import MenuMobile from "./MenuMobile";
 import MenuDesktop from "./MenuDesktop";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import SignUp from "../Pages/SignupPage/SignUp";
 
 const Menu = () => {
@@ -53,26 +55,20 @@ const Menu = () => {
         body: JSON.stringify(signupData)
       })
       const data = await result.json();
+
       if (data.message == "Please provide a valid email address.") {
         alert("enter a valid email")
         return
       }
 
       if (data.message == "User already existed with the email") {
-        alert("User already registered with this email")
+        toast.error("User already exists with this email !");
         return
       }
-      console.log(data)
-      if (data.code == 200) {
-        // setIsLoading(true);
 
-        // setTimeout(() => {
-        //   addNotification()
-        //   setIsLoading(false)
-        //   toast.success("Notification send !");
-        // }, 2000)
+      if (data.code == 200) {
+        toast.success("Signup successfull !", { toastId: 'signupsuccess', });
         setIsOpen(false)
-        alert("sign Up successfull !!")
         setCredentials({ name: "", email: "", password: "" })
       }
     } catch (error) {
