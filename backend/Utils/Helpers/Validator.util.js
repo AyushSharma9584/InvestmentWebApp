@@ -1,12 +1,11 @@
-function validateEmail(email) {
-    const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (emailPattern.test(email)) {
-        return true;
-    } else {
-        return false;
+const emailValidator = require('deep-email-validator');
+
+const validateEmail = (email) => {
+    try {
+        return emailValidator.validate(email)
+    } catch (error) {
+        console.log("error in email validation " + error)
     }
 }
 
-module.exports = {
-    validateEmail
-}
+module.exports = { validateEmail }

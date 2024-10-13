@@ -9,9 +9,9 @@ const { createToken } = require('../Utils/Helpers/Token.util')
 
 const SignupService = async (req, res) => {
     try {
-        const { name, email, phone_no, address, password } = req.body;
+        const { name, email, password } = req.body;
 
-        if (!name || !email || !phone_no || !address || !password) {
+        if (!name || !email || !password) {
             return res.status(400).json({
                 status: "failed",
                 message: "Please provide all inputs",
@@ -19,15 +19,17 @@ const SignupService = async (req, res) => {
             })
         }
 
-        if (!validation.validateEmail(email)) {
-            return res.status(400).json({
-                status: "failed",
-                message: "Invalid email address",
-                code: 400
+        const { valid, reason, validators } = await validation.validateEmail(email)
+        if (!valid) {
+            return res.status(400).send({
+                status: 400,
+                message: "Please provide a valid email address.",
+                reason: validators[reason].reason
             })
         }
 
         const existingUser = await UserRepo.getUserByEmailRepo(email)
+
         if (existingUser.data) {
             return res.status(400).json({
                 message: "User already existed with the email",
@@ -39,14 +41,12 @@ const SignupService = async (req, res) => {
             var userData = {
                 name,
                 email,
-                phone_no,
-                address,
                 password: await hashing.hashPassword(password)
             }
         }
 
         const result = await AuthRepo.SignupRepo(userData)
-        // console.log(result);
+
 
         if (!result) {
             return res.status(400).json({
@@ -57,8 +57,9 @@ const SignupService = async (req, res) => {
         }
         const userId = result.data._id;
         const userEmail = result.data.email;
+        const userName = result.data.name;
 
-        const token = createToken(userId, userEmail);
+        const token = createToken(userId, userEmail, userName);
 
         return res.status(200).json({
             status: "success",
@@ -109,8 +110,9 @@ const LoginService = async (req, res) => {
         }
         const userId = result.data._id;
         const userEmail = result.data.email;
+        const userName = result.data.name;
 
-        const token = createToken(userId, userEmail);
+        const token = createToken(userId, userEmail, userName);
 
         return res.status(200).json({
             status: "success",

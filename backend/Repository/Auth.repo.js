@@ -4,7 +4,6 @@ const SignupRepo = async (userData) => {
     try {
         const user = new User(userData);
         const createdUser = await user.save();
-        // console.log(createdUser)
         if (!createdUser) {
             return res.status(400).json({ message: "Failed to create user" })
         }

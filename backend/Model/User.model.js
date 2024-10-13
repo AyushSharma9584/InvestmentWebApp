@@ -7,23 +7,10 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String
     },
-    gender: {
-        type: String,
-        default: " "
-    },
-    phone_no: {
-        type: Number
-    },
-    city: {
-        type: String
-    },
-    aadhaar_no: {
-        type: String
-    },
     password: {
         type: String
     }
 
 })
 
-module.exports = mongoose.model('mydb', UserSchema)
+module.exports = mongoose.model('user', UserSchema)
