@@ -20,9 +20,53 @@ const Menu = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isView, setIsView] = useState(false)
   const [showPassword, setShowPassword] = useState(false);
+  const [credentials, setCredentials] = useState({ name: "", email: "", password: "" })
+  const [loginVal, setLoginVal] = useState({ email: "", password: "" })
   const [show, setShow] = useState("translate-y-0");
   const [lastScrollY, setLastScrollY] = useState(0);
   const iconRef = useRef(null);
+
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value })
+  }
+
+  // const signupHandle = async () => {
+  //   if (!credentials.name || !credentials.email || !credentials.password) {
+  //     setError(true)
+  //     return
+  //   }
+  //   else {
+  //     setError(false)
+  //   }
+  //   try {
+  //     const signupData = {
+  //       name: credentials.name,
+  //       email: credentials.email,
+  //       password: credentials.password
+  //     }
+  //     const result = await fetch(`${import.meta.env.VITE_KEY}signup`, {
+  //       method: "POST",
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(signupData)
+  //     })
+  //     const data = await result.json();
+  //     if (data) {
+  //       setIsLoading(true);
+
+  //       setTimeout(() => {
+  //         addNotification()
+  //         setIsLoading(false)
+  //         toast.success("Notification send !");
+  //       }, 2000)
+  //       setCredentials({ name: "", email: "", password: "" })
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     toast.error("Server loss !!!");
+  //   }
+  // }
 
   const controllerBar = () => {
     if (window.scrollY > 300) {
@@ -142,7 +186,7 @@ const Menu = () => {
               exit={{ scale: 0, rotate: "0deg" }}
               onClick={(e) => e.stopPropagation()}
               style={{ border: "1px solid #18dae4" }}
-              className="bg-[#100f10] text-white px-6 rounded-lg  md:w-[30%] shadow-xl cursor-default relative text-start overflow-auto h-[70vh]"
+              className="bg-[#100f10] text-white px-6 rounded-lg  md:w-[30%] shadow-xl cursor-default relative text-start overflow-auto h-[78vh]"
             >
               <div className="relative z-10">
                 <img src="sarte.png" className="w-[110px] h-[110px] m-auto" />
@@ -153,12 +197,16 @@ const Menu = () => {
                   <div className="mr-2 flex flex-col  sm:mt-0 ">
                     <div class="space-y-6">
                       <div>
+                        <label class="text-white text-sm mb-2 block">Full Name</label>
+                        <input value={credentials.name} onChange={handleChange} name="name" type="text" class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter name" />
+                      </div>
+                      <div>
                         <label class="text-white text-sm mb-2 block">Email Id</label>
-                        <input name="email" type="text" class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter email" />
+                        <input value={credentials.email} onChange={handleChange} name="email" type="text" class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter email" />
                       </div>
                       <div>
                         <label class="text-white text-sm mb-2 block">Create Password</label>
-                        <input name="password" type={showPassword ? "text" : "password"} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
+                        <input value={credentials.password} onChange={handleChange} name="password" type={showPassword ? "text" : "password"} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
 
                         <input
                           id="check"

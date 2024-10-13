@@ -24,4 +24,16 @@ router.post('/login', async (req, res) => {
     }
 })
 
+router.get('/getall', async (req, res) => {
+    try {
+        const result = await AuthController.getallController(req, res)
+        return result
+
+    } catch (error) {
+        console.log("error in router " + error)
+        return res.status(400).json({ error: "internal server error routerr" })
+
+    }
+})
+
 module.exports = router;

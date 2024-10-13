@@ -44,7 +44,25 @@ const LoginRepo = async (credentials) => {
     }
 }
 
+
+const getallRepo = async () => {
+    try {
+
+        const result = await User.find()
+        if (!result) {
+            return result
+        } else {
+            return result
+        }
+
+    } catch (error) {
+        throw error
+
+    }
+}
+
 module.exports = {
     SignupRepo,
-    LoginRepo
+    LoginRepo,
+    getallRepo
 }

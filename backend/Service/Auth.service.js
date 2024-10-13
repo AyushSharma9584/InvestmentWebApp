@@ -125,12 +125,41 @@ const LoginService = async (req, res) => {
 
 
     } catch (error) {
+        console.log(error)
+    }
+}
 
+
+
+const getallService = async (req, res) => {
+    try {
+        const result = await AuthRepo.getallRepo();
+        if (result == null) {
+            return res.status(400).json({
+                status: "failed",
+                message: "No users found",
+                code: 400
+            })
+        }
+
+        return res.status(200).json({
+            status: "success",
+            message: "Users ----",
+            code: 200,
+            data: result
+        })
+
+
+
+
+    } catch (error) {
+        console.log(error)
     }
 }
 
 
 module.exports = {
     SignupService,
-    LoginService
+    LoginService,
+    getallService
 }
