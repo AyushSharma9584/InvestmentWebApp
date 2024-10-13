@@ -8,6 +8,7 @@ import { VscChromeClose } from "react-icons/vsc";
 import { GoPerson } from "react-icons/go";
 import Wrapper from "../Wrapper";
 import sarteLogo from "../../assets/sarte.png";
+import { jwtDecode } from "jwt-decode";
 import MenuMobile from "./MenuMobile";
 import MenuDesktop from "./MenuDesktop";
 import { ToastContainer, toast } from 'react-toastify';
@@ -18,6 +19,7 @@ const Menu = () => {
   const dropdownRef = useRef(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
+  const [userName, setUserName] = useState("")
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
   const [isView, setIsView] = useState(false)
@@ -26,6 +28,7 @@ const Menu = () => {
   const [credentials, setCredentials] = useState({ name: "", email: "", password: "" })
   const [loginVal, setLoginVal] = useState({ email: "", password: "" })
   const [show, setShow] = useState("translate-y-0");
+  const [key, setKey] = useState("")
   const [lastScrollY, setLastScrollY] = useState(0);
   const iconRef = useRef(null);
 
@@ -36,6 +39,15 @@ const Menu = () => {
   const loginHandleChange = (e) => {
     setLoginVal({ ...loginVal, [e.target.name]: e.target.value })
   }
+
+  useEffect(() => {
+    let val = localStorage.getItem("token")
+    if (val) {
+      setKey(val)
+      const decoded = jwtDecode(val);
+      setUserName(decoded.userName)
+    }
+  }, [isOpen, isView])
 
 
   const signupHandle = async () => {
@@ -75,6 +87,7 @@ const Menu = () => {
       if (data.code == 200) {
         toast.success("Signup successfull !", { toastId: 'signupsuccess', });
         setIsOpen(false)
+        localStorage.setItem('token', data.token)
         setCredentials({ name: "", email: "", password: "" })
       }
     } catch (error) {
@@ -122,12 +135,22 @@ const Menu = () => {
       if (data.code == 200) {
         toast.success("Signup successfull !", { toastId: 'loginsuccess', });
         setIsView(false)
+        localStorage.setItem('token', data.token);
         setLoginVal({ email: "", password: "" })
       }
     } catch (error) {
       console.error('Error:', error);
       // toast.error("Server loss !!!");
     }
+  }
+
+  const logoutHandle = () => {
+    localStorage.removeItem("token");
+    toast.success("Logged Out !", { toastId: 'loginsuccess2', });
+    setTimeout(() => {
+      window.location.reload();
+    }, 2100)
+
   }
 
   const controllerBar = () => {
@@ -206,11 +229,21 @@ const Menu = () => {
               {
                 toggle &&
                 <div ref={dropdownRef} className="origin-top-right absolute right-0 mt-1 py-3 w-[120px] h-auto bg-neutral-800 rounded-md shadow-lg text-center">
-                  <h1 onClick={() => setIsOpen(!isOpen)} className="cursor-pointer mb-1 hover:text-[#18dae4]">Signup</h1>
-                  <h1 onClick={() => setIsView(!isOpen)} className="cursor-pointer hover:text-[#18dae4]">Login</h1>
+                  {
+                    !key ? <> <h1 onClick={() => setIsOpen(!isOpen)} className="cursor-pointer mb-1 hover:text-[#18dae4]">Signup</h1>
+                      <h1 onClick={() => setIsView(!isOpen)} className="cursor-pointer hover:text-[#18dae4]">Login</h1></> :
+                      <h1 onClick={logoutHandle} className="cursor-pointer hover:text-[#18dae4]">Logout</h1>
+                  }
+
 
                 </div>
 
+              }
+
+            </div>
+            <div>
+              {
+                userName != "" ? <h1 className="text-[#18dae4]">{userName}</h1> : ""
               }
 
             </div>
