@@ -33,6 +33,11 @@ const Menu = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   }
 
+  const loginHandleChange = (e) => {
+    setLoginVal({ ...loginVal, [e.target.name]: e.target.value })
+  }
+
+
   const signupHandle = async () => {
     if (!credentials.name || !credentials.email || !credentials.password) {
       setError(true)
@@ -71,6 +76,53 @@ const Menu = () => {
         toast.success("Signup successfull !", { toastId: 'signupsuccess', });
         setIsOpen(false)
         setCredentials({ name: "", email: "", password: "" })
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // toast.error("Server loss !!!");
+    }
+  }
+
+
+
+  const loginHandle = async () => {
+    if (!loginVal.email || !loginVal.password) {
+      setError(true)
+      return
+    }
+    else {
+      setError(false)
+    }
+    try {
+      const loginData = {
+        email: loginVal.email,
+        password: loginVal.password
+      }
+      console.log(loginData)
+      const result = await fetch(`${import.meta.env.VITE_KEY}auth/api/login`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginData)
+      })
+      const data = await result.json();
+      console.log(data)
+
+      if (data.message == "Email not found") {
+        toast.error("Email not found !", { toastId: 'loginerror1', })
+        return
+      }
+
+      if (data.message == "Please enter correct password") {
+        toast.error("Please enter correct password !", { toastId: 'loginerror2', });
+        return
+      }
+
+      if (data.code == 200) {
+        toast.success("Signup successfull !", { toastId: 'loginsuccess', });
+        setIsView(false)
+        setLoginVal({ email: "", password: "" })
       }
     } catch (error) {
       console.error('Error:', error);
@@ -281,12 +333,13 @@ const Menu = () => {
                     <div class="space-y-6">
                       <div>
                         <label class="text-white text-sm mb-2 block">Email Id</label>
-                        <input name="email" type="text" class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter email" />
+                        <input value={loginVal.email} onChange={loginHandleChange} name="email" type="text" class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter email" />
+                        {error && loginVal.email == "" ? <p className='text-sm' ><i className="text-red-600">Please enter email</i></p> : " "}
                       </div>
                       <div>
                         <label class="text-white text-sm mb-2 block">Password</label>
-                        <input name="password" type={showPassword ? "text" : "password"} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
-
+                        <input value={loginVal.password} onChange={loginHandleChange} name="password" type={showPassword ? "text" : "password"} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
+                        {error && loginVal.password == "" ? <p className='text-sm' ><i className="text-red-600">Please enter password</i></p> : " "}
                         <input
                           id="check"
                           className="mt-3"
@@ -304,7 +357,7 @@ const Menu = () => {
                     <div class="!mt-12">
                       <div className="flex gap-2  justify-center">
                         <button
-                          onClick={() => setIsView(false)}
+                          onClick={loginHandle}
                           className="bg-[#18dae4] transition-all hover:bg-[#0b9198]  text-black hover:text-white font-semibold  py-2 rounded w-60"
                         >
                           Login
