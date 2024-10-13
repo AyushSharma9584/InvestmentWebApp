@@ -2,7 +2,7 @@ const AuthRepo = require('../Repository/Auth.repo')
 const UserRepo = require('../Repository/User.repo')
 // const validation = require('../Utils/Helpers/Validator.util')
 const hashing = require('../Utils/Helpers/Bcrypt.util')
-// const { createToken } = require('../Utils/Helpers/Token.util')
+const { createToken } = require('../Utils/Helpers/Token.util')
 
 
 // Service for Sign_up  ----------------------------------------->
