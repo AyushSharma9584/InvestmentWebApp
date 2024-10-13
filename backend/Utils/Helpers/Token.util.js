@@ -3,8 +3,9 @@ const Secret_Key = process.env.Secret_Key
 
 const createToken = (userId, userEmail, userName) => {
     try {
-        console.log(userId, userEmail, userName)
+        console.log(userId, userEmail, userName, Secret_Key)
         const token = jwt.sign({ userId, userEmail, userName }, Secret_Key, { expiresIn: "5h" });
+        console.log("token", token)
         return token;
 
     } catch {
