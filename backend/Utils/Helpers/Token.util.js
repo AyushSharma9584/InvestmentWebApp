@@ -9,7 +9,7 @@ const createToken = (userId, userEmail, userName) => {
         return token;
 
     } catch {
-        console.log("error in token creation")
+        console.log("error in token creation", error)
         throw error;
     }
 }
