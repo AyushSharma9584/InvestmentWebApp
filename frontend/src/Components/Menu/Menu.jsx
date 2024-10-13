@@ -55,6 +55,7 @@ const Menu = () => {
         body: JSON.stringify(signupData)
       })
       const data = await result.json();
+      console.log(data)
 
       if (data.message == "Please provide a valid email address.") {
         alert("enter a valid email")
@@ -195,7 +196,7 @@ const Menu = () => {
               exit={{ scale: 0, rotate: "0deg" }}
               onClick={(e) => e.stopPropagation()}
               style={{ border: "1px solid #18dae4" }}
-              className="bg-[#100f10] text-white px-6 rounded-lg  md:w-[30%] shadow-xl cursor-default relative text-start overflow-auto h-[78vh]"
+              className="bg-[#100f10] text-white px-6 rounded-lg  md:w-[30%] shadow-xl cursor-default relative text-start overflow-auto h-[80vh]"
             >
               <div className="relative z-10">
                 <img src="sarte.png" className="w-[110px] h-[110px] m-auto" />
