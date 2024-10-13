@@ -56,11 +56,11 @@ const SignupService = async (req, res) => {
                 code: 201
             })
         }
-        // const userId = result.data._id;
-        // const userEmail = result.data.email;
-        // const userName = result.data.name;
+        const userId = result.data._id;
+        const userEmail = result.data.email;
+        const userName = result.data.name;
 
-        // const token = createToken(userId, userEmail, userName);
+        const token = createToken(userId, userEmail, userName);
 
         return res.status(200).json({
             status: "success",
