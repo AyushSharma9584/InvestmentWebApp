@@ -63,6 +63,7 @@ const Menu = () => {
         alert("User already registered with this email")
         return
       }
+      console.log(data)
       if (data.code == 200) {
         // setIsLoading(true);
 
