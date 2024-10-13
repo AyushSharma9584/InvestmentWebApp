@@ -1,6 +1,6 @@
 const AuthRepo = require('../Repository/Auth.repo')
 const UserRepo = require('../Repository/User.repo')
-const validation = require('../Utils/Helpers/Validator.util')
+// const validation = require('../Utils/Helpers/Validator.util')
 const hashing = require('../Utils/Helpers/Bcrypt.util')
 const { createToken } = require('../Utils/Helpers/Token.util')
 
@@ -19,14 +19,15 @@ const SignupService = async (req, res) => {
             })
         }
 
-        const { valid, reason, validators } = await validation.validateEmail(email)
-        if (!valid) {
-            return res.status(400).send({
-                status: 400,
-                message: "Please provide a valid email address.",
-                reason: validators[reason].reason
-            })
-        }
+
+        // const { valid, reason, validators } = await validation.validateEmail(email)
+        // if (!valid) {
+        //     return res.status(400).send({
+        //         status: 400,
+        //         message: "Please provide a valid email address.",
+        //         reason: validators[reason].reason
+        //     })
+        // }
 
         const existingUser = await UserRepo.getUserByEmailRepo(email)
 

@@ -19,6 +19,7 @@ const Menu = () => {
   const [toggle, setToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
   const [isView, setIsView] = useState(false)
+  const [error, setError] = useState(false)
   const [showPassword, setShowPassword] = useState(false);
   const [credentials, setCredentials] = useState({ name: "", email: "", password: "" })
   const [loginVal, setLoginVal] = useState({ email: "", password: "" })
@@ -30,43 +31,55 @@ const Menu = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   }
 
-  // const signupHandle = async () => {
-  //   if (!credentials.name || !credentials.email || !credentials.password) {
-  //     setError(true)
-  //     return
-  //   }
-  //   else {
-  //     setError(false)
-  //   }
-  //   try {
-  //     const signupData = {
-  //       name: credentials.name,
-  //       email: credentials.email,
-  //       password: credentials.password
-  //     }
-  //     const result = await fetch(`${import.meta.env.VITE_KEY}signup`, {
-  //       method: "POST",
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(signupData)
-  //     })
-  //     const data = await result.json();
-  //     if (data) {
-  //       setIsLoading(true);
+  const signupHandle = async () => {
+    if (!credentials.name || !credentials.email || !credentials.password) {
+      setError(true)
+      return
+    }
+    else {
+      setError(false)
+    }
+    try {
+      const signupData = {
+        name: credentials.name,
+        email: credentials.email,
+        password: credentials.password
+      }
+      console.log(signupData)
+      const result = await fetch(`${import.meta.env.VITE_KEY}auth/api/signup`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(signupData)
+      })
+      const data = await result.json();
+      if (data.message == "Please provide a valid email address.") {
+        alert("enter a valid email")
+        return
+      }
 
-  //       setTimeout(() => {
-  //         addNotification()
-  //         setIsLoading(false)
-  //         toast.success("Notification send !");
-  //       }, 2000)
-  //       setCredentials({ name: "", email: "", password: "" })
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //     toast.error("Server loss !!!");
-  //   }
-  // }
+      if (data.message == "User already existed with the email") {
+        alert("User already registered with this email")
+        return
+      }
+      if (data.code == 200) {
+        // setIsLoading(true);
+
+        // setTimeout(() => {
+        //   addNotification()
+        //   setIsLoading(false)
+        //   toast.success("Notification send !");
+        // }, 2000)
+        setIsOpen(false)
+        alert("sign Up successfull !!")
+        setCredentials({ name: "", email: "", password: "" })
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // toast.error("Server loss !!!");
+    }
+  }
 
   const controllerBar = () => {
     if (window.scrollY > 300) {
@@ -199,15 +212,17 @@ const Menu = () => {
                       <div>
                         <label class="text-white text-sm mb-2 block">Full Name</label>
                         <input value={credentials.name} onChange={handleChange} name="name" type="text" class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter name" />
+                        {error && credentials.name == "" ? <p className='text-sm' ><i>Please enter name</i></p> : " "}
                       </div>
                       <div>
                         <label class="text-white text-sm mb-2 block">Email Id</label>
                         <input value={credentials.email} onChange={handleChange} name="email" type="text" class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter email" />
+                        {error && credentials.email == "" ? <p className='text-sm' ><i>Please enter email</i></p> : " "}
                       </div>
                       <div>
                         <label class="text-white text-sm mb-2 block">Create Password</label>
                         <input value={credentials.password} onChange={handleChange} name="password" type={showPassword ? "text" : "password"} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
-
+                        {error && credentials.password == "" ? <p className='text-sm' ><i>Please enter password</i></p> : " "}
                         <input
                           id="check"
                           className="mt-3"
@@ -225,7 +240,7 @@ const Menu = () => {
                     <div class="!mt-12">
                       <div className="flex gap-2  justify-center">
                         <button
-                          onClick={() => setIsOpen(false)}
+                          onClick={signupHandle}
                           className="bg-[#18dae4] transition-all hover:bg-[#0b9198]  text-black hover:text-white font-semibold  py-2 rounded w-60"
                         >
                           SignUp
