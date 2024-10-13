@@ -45,7 +45,6 @@ const Menu = () => {
         email: credentials.email,
         password: credentials.password
       }
-      console.log(signupData)
       const result = await fetch(`${import.meta.env.VITE_KEY}auth/api/signup`, {
         method: "POST",
         headers: {
