@@ -67,7 +67,7 @@ const SignupService = async (req, res) => {
             message: "User created successfully",
             code: 200,
             data: result.data,
-            // token: token
+            token: token
 
         })
 

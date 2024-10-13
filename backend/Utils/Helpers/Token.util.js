@@ -1,10 +1,9 @@
-var jwt = require('jsonwebtoken');
-const dotenv = require('dotenv')
-dotenv.config();
+const jwt = require('jsonwebtoken');
 const Secret_Key = process.env.Secret_Key
 
 const createToken = (userId, userEmail, userName) => {
     try {
+        console.log(userId, userEmail, userName)
         const token = jwt.sign({ userId, userEmail, userName }, Secret_Key, { expiresIn: "5h" });
         return token;
 
