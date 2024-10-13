@@ -2,7 +2,7 @@ const AuthRepo = require('../Repository/Auth.repo')
 const UserRepo = require('../Repository/User.repo')
 // const validation = require('../Utils/Helpers/Validator.util')
 const hashing = require('../Utils/Helpers/Bcrypt.util')
-const { createToken } = require('../Utils/Helpers/Token.util')
+// const { createToken } = require('../Utils/Helpers/Token.util')
 
 
 // Service for Sign_up  ----------------------------------------->
@@ -56,18 +56,18 @@ const SignupService = async (req, res) => {
                 code: 201
             })
         }
-        const userId = result.data._id;
-        const userEmail = result.data.email;
-        const userName = result.data.name;
+        // const userId = result.data._id;
+        // const userEmail = result.data.email;
+        // const userName = result.data.name;
 
-        const token = createToken(userId, userEmail, userName);
+        // const token = createToken(userId, userEmail, userName);
 
         return res.status(200).json({
             status: "success",
             message: "User created successfully",
             code: 200,
             data: result.data,
-            token: token
+            // token: token
 
         })
 
