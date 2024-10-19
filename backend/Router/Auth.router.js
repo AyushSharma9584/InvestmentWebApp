@@ -37,7 +37,7 @@ router.get('/getall', async (req, res) => {
 })
 
 
-router.get('/getemployee', async (req, res) => {
+router.post('/getemployee', async (req, res) => {
     try {
         const result = await AuthController.getempcontroller(req, res)
         return result
