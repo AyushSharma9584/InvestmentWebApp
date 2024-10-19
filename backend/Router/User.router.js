@@ -6,7 +6,6 @@ const { isAuthenticate } = require('../Middleware/User.middleware')
 router.post('/register', isAuthenticate, async (req, res) => {
     try {
         const result = await UserController.RegisterController(req, res);
-        auth.isAuthenticate
         return result
     } catch (error) {
         console.log("error in router " + error)

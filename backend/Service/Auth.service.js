@@ -91,7 +91,7 @@ const LoginService = async (req, res) => {
                 code: 400
             })
         }
-        console.log(email)
+
 
         const result = await UserRepo.getUserByEmailRepo(email);
         if (result.data == null) {
