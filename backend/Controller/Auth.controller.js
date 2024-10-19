@@ -36,8 +36,21 @@ const getallController = async (req, res) => {
 
 }
 
+const getempcontroller = async (req, res) => {
+    try {
+        const result = await AuthService.getempservice(req, res);
+        return result;
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error controller" })
+
+    }
+
+}
+
 module.exports = {
     SignupController,
     LoginController,
-    getallController
+    getallController,
+    getempcontroller
 }

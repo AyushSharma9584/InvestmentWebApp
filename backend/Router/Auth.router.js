@@ -36,4 +36,20 @@ router.get('/getall', async (req, res) => {
     }
 })
 
+
+router.get('/getemployee', async (req, res) => {
+    try {
+        const result = await AuthController.getempcontroller(req, res)
+        return result
+
+    } catch (error) {
+        console.log("error in router " + error)
+        return res.status(400).json({ error: "internal server error routerr" })
+
+    }
+})
+
+
+
+
 module.exports = router;

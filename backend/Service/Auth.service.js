@@ -160,8 +160,38 @@ const getallService = async (req, res) => {
 }
 
 
+
+const getempservice = async (req, res) => {
+    try {
+        const { email } = req.body
+        const result = await UserRepo.getUserByEmailRepo(email)
+        if (result.data == null) {
+            return res.status(400).json({
+                status: "failed",
+                message: "No users found",
+                code: 400
+            })
+        }
+
+        return res.status(200).json({
+            status: "success",
+            message: "Users ----",
+            code: 200,
+            data: result.data
+        })
+
+
+
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 module.exports = {
     SignupService,
     LoginService,
-    getallService
+    getallService,
+    getempservice
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "./Components/Menu/Menu";
 import Footer from "./Components/Pages/FooterPage/Footer";
 import Registration from "./Components/Pages/Registration/Registration";
@@ -8,6 +8,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false)
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      setIsOpen(true)
+    }
+  }, [isOpen])
   return (
     <div className="w-full h-full">
       <ToastContainer
@@ -23,7 +29,10 @@ const App = () => {
       />
 
       <Menu />
-      <Registration />
+      {
+        isOpen && <Registration />
+      }
+
       <Routing />
       <Footer />
     </div>

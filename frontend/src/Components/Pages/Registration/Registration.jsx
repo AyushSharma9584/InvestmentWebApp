@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from "framer-motion";
+import { jwtDecode } from "jwt-decode";
 
 const Registration = () => {
-    const [isOpen, setIsOpen] = useState(true)
-    const [credentials, setCredentials] = useState({ aadhar: "", pan: "", account: "", ifsc: "", bank: "", city: "", state: "", pin: "" })
+    const [isOpen, setIsOpen] = useState(false)
+    const [credentials, setCredentials] = useState({ aadhar: "", pan: "", account: "", ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
     const [info, setInfo] = useState({ name: "", email: "" })
+    const [error, setError] = useState(false)
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        const decoded = jwtDecode(token);
+        setInfo({ name: decoded.userName, email: decoded.userEmail })
+    }, [])
+    const handleSubmit = () => {
+        console.log("a")
+    }
     return (
         <div >
             <AnimatePresence >
@@ -38,13 +48,13 @@ const Registration = () => {
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                                             Name
                                         </label>
-                                        <input class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" />
+                                        <input value={info.name} class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" />
                                     </div>
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
                                             Email
                                         </label>
-                                        <input class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" />
+                                        <input value={info.email} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" />
                                     </div>
                                 </div>
 
@@ -54,6 +64,7 @@ const Registration = () => {
                                             Aadhaar number
                                         </label>
                                         <input value={credentials.aadhar} class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" placeholder="Enter Aadhaar number" />
+                                        {error && credentials.aadhar == "" ? <p className='text-sm' ><i>Please enter Aadhaar number</i></p> : " "}
 
                                     </div>
                                     <div class="md:w-1/2 px-3">
@@ -61,6 +72,9 @@ const Registration = () => {
                                             PAN number
                                         </label>
                                         <input value={credentials.pan} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" placeholder="Enter PAN number" />
+                                        {error && credentials.pan == "" ? <p className='text-sm' ><i>Please enter Pan  number</i></p> : " "}
+
+
                                     </div>
                                 </div>
 
@@ -70,21 +84,32 @@ const Registration = () => {
                                             Account number
                                         </label>
                                         <input value={credentials.account} class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" placeholder="Enter Account number" />
-
+                                        {error && credentials.account == "" ? <p className='text-sm' ><i>Please enter Account number</i></p> : " "}
                                     </div>
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
                                             IFSC code
                                         </label>
                                         <input value={credentials.ifsc} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" placeholder="Enter IFSC code" />
+                                        {error && credentials.ifsc == "" ? <p className='text-sm' ><i>Please enter IFSC number</i></p> : " "}
+
                                     </div>
                                 </div>
+
                                 <div class="-mx-3 md:flex mb-6">
-                                    <div class="md:w-full px-3">
-                                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
+                                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                                             Bank name
                                         </label>
-                                        <input value={credentials.bank} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-password" type="password" placeholder="Enter Bank name" />
+                                        <input value={credentials.bank} class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" placeholder="Enter Bank name" />
+                                        {error && credentials.bank == "" ? <p className='text-sm' ><i>Please enter Bank name</i></p> : " "}
+
+                                    </div>
+                                    <div class="md:w-1/2 px-3">
+                                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
+                                            UPI number <span className='ml-3'>(optional)</span>
+                                        </label>
+                                        <input value={credentials.upi} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" placeholder="Enter UPI " />
 
                                     </div>
                                 </div>
@@ -94,18 +119,24 @@ const Registration = () => {
                                             City
                                         </label>
                                         <input value={credentials.city} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-city" type="text" placeholder="Enter City" />
+                                        {error && credentials.city == "" ? <p className='text-sm' ><i>Please enter City</i></p> : " "}
+
                                     </div>
                                     <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
                                             State
                                         </label>
                                         <input value={credentials.state} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-city" type="text" placeholder="Enter State" />
+                                        {error && credentials.state == "" ? <p className='text-sm' ><i>Please enter state</i></p> : " "}
+
                                     </div>
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
                                             Pin code
                                         </label>
                                         <input value={credentials.pin} class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-zip" type="text" placeholder="Enter Pin Code" />
+                                        {error && credentials.pin == "" ? <p className='text-sm' ><i>Please enter PIN</i></p> : " "}
+
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +144,7 @@ const Registration = () => {
                                 <div className="flex gap-2  justify-center">
                                     <button
 
-                                        className="bg-[#18dae4] transition-all hover:bg-[#0b9198]  text-black hover:text-white font-semibold  py-2 rounded w-60"
+                                        onClick={handleSubmit} className="bg-[#18dae4] transition-all hover:bg-[#0b9198]  text-black hover:text-white font-semibold  py-2 rounded w-60"
                                     >
                                         Submit
                                     </button>
