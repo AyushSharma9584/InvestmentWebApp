@@ -7,7 +7,7 @@ const addProduct = async (req, res) => {
         if (!productName || !productDescription || !productPrice) {
             return res.status(400).json({
                 status: "failed",
-                message: "Please provide all the inputs",
+                message: "Please provide all the inputs..",
                 code: 400
             })
         }
