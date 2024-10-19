@@ -49,7 +49,10 @@ const UpdateStatusRepo = async (data) => {
     try {
         const email = data.email
 
-        const updateStatus = { ...data, status: true }
+        const updateStatus = {
+            ...data,
+            register_status: true
+        }
 
         const updatedItem = await User.findOneAndUpdate(
             { email },
