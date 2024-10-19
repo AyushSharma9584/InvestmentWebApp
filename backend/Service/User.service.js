@@ -43,6 +43,7 @@ const RegisterService = async (req, res) => {
 
         const updateStatus = await UserRepo.UpdateStatusRepo(userData)
 
+
         if (!updateStatus || !result) {
             return res.status(404).send('status no updated');
         }

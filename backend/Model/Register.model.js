@@ -26,7 +26,7 @@ const UserRegisterSchema = new mongoose.Schema({
         type: Number
     },
     upi_no: {
-        type: Number
+        type: String
     },
     city: {
         type: String

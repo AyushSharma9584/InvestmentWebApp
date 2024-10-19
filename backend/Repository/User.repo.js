@@ -51,15 +51,13 @@ const UpdateStatusRepo = async (data) => {
 
         const updateStatus = { ...data, status: true }
 
-        const updatedItem = await Item.findOneAndUpdate(
+        const updatedItem = await User.findOneAndUpdate(
             { email },
             { $set: updateStatus },
             { new: true, runValidators: true }
         );
 
-        if (!updatedItem) {
-            return res.status(404).send('status no updated');
-        }
+
 
         return updatedItem
     }
