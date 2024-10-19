@@ -2,7 +2,8 @@ const express = require('express')
 const User = require("../Model/User.model")
 const SignupRepo = async (userData) => {
     try {
-        const user = new User(userData);
+        const data = { ...userData, email: userData.email.toLowerCase() }
+        const user = new User(data);
         const createdUser = await user.save();
         if (!createdUser) {
             return res.status(400).json({ message: "Failed to create user" })
@@ -22,7 +23,7 @@ const SignupRepo = async (userData) => {
 
 const LoginRepo = async (credentials) => {
     try {
-        const email = credentials.email
+        const email = credentials.email.toLowerCase()
         const result = await User.findOne({ email })
         if (!result) {
             return {

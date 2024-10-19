@@ -1,10 +1,12 @@
 const User = require('../Model/User.model')
+const register = require('../Model/Register.model')
 
 
 const getUserByEmailRepo = async (email) => {
     try {
+        const em = email.toLowerCase()
         const user = await User.findOne({
-            email: email
+            email: em
         })
         if (user) {
             return {
@@ -29,6 +31,44 @@ const getUserByEmailRepo = async (email) => {
     }
 }
 
+
+const RegisterRepo = async (data) => {
+    try {
+        const Register = await new register(data)
+        const add = Register.save()
+        return add
+    }
+    catch (error) {
+        console.log("internal server error user", error)
+        throw error;
+    }
+}
+
+
+const UpdateStatusRepo = async (data) => {
+    try {
+        const email = data.email
+
+        const updateStatus = { ...data, status: true }
+
+        const updatedItem = await Item.findOneAndUpdate(
+            { email },
+            { $set: updateStatus },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedItem) {
+            return res.status(404).send('status no updated');
+        }
+
+        return updatedItem
+    }
+    catch (error) {
+        console.log("internal server error user", error)
+        throw error;
+    }
+}
+
 module.exports = {
-    getUserByEmailRepo
+    getUserByEmailRepo, RegisterRepo, UpdateStatusRepo
 }

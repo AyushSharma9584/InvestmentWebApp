@@ -91,6 +91,7 @@ const LoginService = async (req, res) => {
                 code: 400
             })
         }
+        console.log(email)
 
         const result = await UserRepo.getUserByEmailRepo(email);
         if (result.data == null) {
@@ -110,7 +111,7 @@ const LoginService = async (req, res) => {
             })
         }
         const userId = result.data._id;
-        const userEmail = result.data.email;
+        const userEmail = result.data.email.toLowerCase();
         const userName = result.data.name;
 
         const token = createToken(userId, userEmail, userName);

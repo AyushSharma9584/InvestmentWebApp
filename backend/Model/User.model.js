@@ -5,10 +5,15 @@ const UserSchema = new mongoose.Schema({
         type: String
     },
     email: {
-        type: String
+        type: String,
+
     },
     password: {
-        type: String
+        type: String,
+    },
+    register_status: {
+        type: Boolean,
+        default: false
     }
 
 })

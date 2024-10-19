@@ -1,10 +1,13 @@
+import { useState } from "react";
 import Menu from "./Components/Menu/Menu";
 import Footer from "./Components/Pages/FooterPage/Footer";
+import Registration from "./Components/Pages/Registration/Registration";
 import Routing from "./Routes/Routing";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <div className="w-full h-full">
       <ToastContainer
@@ -18,7 +21,9 @@ const App = () => {
         pauseOnHover
         theme="dark"
       />
+
       <Menu />
+      <Registration />
       <Routing />
       <Footer />
     </div>
