@@ -133,7 +133,7 @@ const Menu = () => {
       }
 
       if (data.code == 200) {
-        toast.success("Signup successfull !", { toastId: 'loginsuccess', });
+        toast.success("Login successfull !", { toastId: 'loginsuccess', });
         setIsView(false)
         localStorage.setItem('token', data.token);
         setLoginVal({ email: "", password: "" })

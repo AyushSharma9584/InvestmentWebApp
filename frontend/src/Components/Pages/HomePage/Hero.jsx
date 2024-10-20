@@ -5,29 +5,65 @@ import hero1 from "../../../assets/home/Home_img1.jpg"
 import hero2 from "../../../assets/home/Home_img2.jpg"
 import hero3 from "../../../assets/home/Home_img3.jpg"
 import hero4 from "../../../assets/home/Home_img4.jpg"
+import Registerbybtn from "../Registration/Registerbybtn";
+import { jwtDecode } from "jwt-decode";
+
 
 const Hero = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const handleRegister = async () => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      const decoded = jwtDecode(token)
+      let email = decoded.userEmail
+
+      try {
+        const result = await fetch(`${import.meta.env.VITE_KEY}auth/api/getemployee`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email })
+        })
+        const data = await result.json();
+        if (data.data.register_status == false) {
+          setIsOpen(true)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+  const onHide = () => {
+    setIsOpen(false)
+  }
   return (
-    <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto md:mt-0 mt-28">
-      <div>
-        <span className="block mb-4 text-xs md:text-sm text-[#18dae4] font-medium">
-          Better every day
-        </span>
-        <h1 className="text-4xl md:text-6xl font-semibold">
-          A Path to Exceptional Investment Growth
-        </h1>
-        <p className="text-base md:text-lg text-slate-300 my-4 md:my-6">
-          Welcome to Sarte Infosoft & Solutions, where your financial
-          aspirations become reality. Our goal is to offer you exceptional
-          investment opportunities , Assisting you in reaching financial
-          independence no matter where you stand financially right now.
-        </p>
-        <button className="bg-[#18dae4] text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95">
-          Registration
-        </button>
-      </div>
-      <ShuffleGrid />
-    </section>
+    <>
+      {
+        isOpen && <Registerbybtn isOpen={isOpen} onHide={onHide} />
+      }
+
+      <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto md:mt-0 mt-28">
+        <div>
+          <span className="block mb-4 text-xs md:text-sm text-[#18dae4] font-medium">
+            Better every day
+          </span>
+          <h1 className="text-4xl md:text-6xl font-semibold">
+            A Path to Exceptional Investment Growth
+          </h1>
+          <p className="text-base md:text-lg text-slate-300 my-4 md:my-6">
+            Welcome to Sarte Infosoft & Solutions, where your financial
+            aspirations become reality. Our goal is to offer you exceptional
+            investment opportunities , Assisting you in reaching financial
+            independence no matter where you stand financially right now.
+          </p>
+          <button onClick={handleRegister} className="bg-[#18dae4] text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95">
+            Registration
+          </button>
+        </div>
+        <ShuffleGrid />
+      </section>
+    </>
   );
 };
 

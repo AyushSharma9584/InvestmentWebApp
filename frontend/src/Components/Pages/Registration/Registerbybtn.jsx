@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { jwtDecode } from "jwt-decode";
 import { FaXmark } from "react-icons/fa6";
 
-const Registration = (props) => {
+const Registerbybtn = (props) => {
     const [credentials, setCredentials] = useState({ aadhar: "", pan: "", account: "", ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
     const [info, setInfo] = useState({ name: "", email: "" })
     const [error, setError] = useState(false)
@@ -162,4 +162,4 @@ const Registration = (props) => {
     )
 }
 
-export default Registration
+export default Registerbybtn
