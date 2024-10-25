@@ -180,8 +180,19 @@ const getempservice = async (req, res) => {
             data: result.data
         })
 
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
+const testservice = async (req, res) => {
+    try {
+        return res.status(200).json({
+            status: "success",
+            message: "test Api callingg !!",
+            code: 200,
+        })
 
     } catch (error) {
         console.log(error)
@@ -193,5 +204,6 @@ module.exports = {
     SignupService,
     LoginService,
     getallService,
-    getempservice
+    getempservice,
+    testservice
 }
