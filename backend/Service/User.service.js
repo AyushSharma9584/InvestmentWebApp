@@ -6,9 +6,9 @@ const RegisterService = async (req, res) => {
     try {
         const na = req.user.userName
         const em = req.user.userEmail
-        const { aadhaar_no, ifsc, account_no, pan_no, bank_name, phone_no, upi_no, city, state, pin_code } = req.body;
+        const { aadhaar_no, ifsc, account_no, pan_no, bank_name, upi_no, city, state, pin_code } = req.body;
 
-        if (!aadhaar_no || !ifsc || !account_no || !pan_no || !bank_name || !phone_no || !city || !state || !pin_code) {
+        if (!aadhaar_no || !ifsc || !account_no || !pan_no || !bank_name || !city || !state || !pin_code) {
             return res.status(400).json({
                 status: "failed",
                 message: "Please provide all inputs",
@@ -33,7 +33,6 @@ const RegisterService = async (req, res) => {
             account_no,
             pan_no,
             bank_name,
-            phone_no,
             upi_no,
             city,
             state,

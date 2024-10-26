@@ -22,9 +22,6 @@ const UserRegisterSchema = new mongoose.Schema({
     bank_name: {
         type: String
     },
-    phone_no: {
-        type: Number
-    },
     upi_no: {
         type: String
     },

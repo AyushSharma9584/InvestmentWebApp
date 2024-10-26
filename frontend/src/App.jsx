@@ -15,7 +15,18 @@ const App = () => {
       const decoded = jwtDecode(token)
       getEmp(decoded.userEmail)
     }
+
   }, [])
+
+  useEffect(() => {
+    hitApi()
+  })
+
+  const hitApi = async () => {
+    const result = await fetch('https://api.sarteinfomining.com/auth/api/test')
+    const data = await result.json()
+    console.log(data)
+  }
 
   const getEmp = async (email) => {
     try {
@@ -55,9 +66,9 @@ const App = () => {
       />
 
       <Menu />
-      {
+      {/* {
         isOpen && <Registration isOpen={isOpen} onHide={onHide} />
-      }
+      } */}
 
       <Routing />
       <Footer />

@@ -7,6 +7,8 @@ import Products from "../Components/Pages/ProductPage/Products";
 import Knowledge from "../Components/Pages/KnowledgePage/Knowledge";
 import SignUp from "../Components/Pages/SignupPage/SignUp";
 import Login from "../Components/Pages/LoginPage/Login";
+import userRegisteration from "../Components/Pages/Registration/userRegisteration";
+import Registration from "../Components/Pages/Registration/Registration";
 
 const Routing = () => {
   return (
@@ -15,7 +17,9 @@ const Routing = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/register" element={<Registration />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/user-registration" element={userRegisteration} />
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/knowledge" element={<Knowledge />} />
         <Route path="/create-user" element={<SignUp />} />
