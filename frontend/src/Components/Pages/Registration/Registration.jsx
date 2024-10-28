@@ -11,6 +11,7 @@ const Registration = (props) => {
     const [info, setInfo] = useState({ name: "", email: "" })
     const [valid, setValid] = useState({ aadhaar: false, account: false, pan: false, ifsc: false })
     const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         const token = localStorage.getItem('token')
         const decoded = jwtDecode(token);
@@ -28,44 +29,13 @@ const Registration = (props) => {
 
     const validation = (credentials) => {
 
-        // if (!(/^[2-9]{1}[0-9]{11}$/.test(credentials.aadhar))) {
-        //     setValid({ ...valid, aadhaar: true })
-        // }
-
-        // if (!(/^[0-9]{9,18}$/.test(credentials.account))) {
-        //     setValid({ ...valid, account: true })
-        // }
-
-        // if (!(/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(credentials.pan))) {
-        //     setValid({ ...valid, pan: true })
-
-        // }
-
-        // if (!(/^[A-Z]{4}0[A-Z0-9]{6}$/.test(credentials.ifsc))) {
-        //     setValid({ ...valid, ifsc: true })
-        // }
-
-        // console.log(valid.aadhaar)
-
-
-        // if (valid.aadhaar || valid.account || valid.ifsc || valid.pan) {
-        //     return true
-        // }
-        // else {
-        //     return false
-        // }
-
         const tempValid = {
             aadhaar: !(/^[2-9]{1}[0-9]{11}$/.test(credentials.aadhar)),
             account: !(/^[0-9]{9,18}$/.test(credentials.account)),
             pan: !(/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(credentials.pan)),
             ifsc: !(/^[A-Z]{4}0[A-Z0-9]{6}$/.test(credentials.ifsc))
         };
-
-        // Update the state with the final validation results
         setValid(tempValid);
-
-        // If any of the fields are invalid, return true (indicating a validation error)
         return Object.values(tempValid).some((isInvalid) => isInvalid);
     }
 
@@ -80,6 +50,7 @@ const Registration = (props) => {
         }
 
         if (validation(credentials)) {
+            console.log("hiii")
             return
 
         } else {
@@ -98,7 +69,6 @@ const Registration = (props) => {
                 pin_code: credentials.pin,
 
             }
-            console.log(registerData)
             let token = localStorage.getItem('token')
             const result = await fetch(`${import.meta.env.VITE_KEY}user/api/register`, {
                 method: "POST",
@@ -110,11 +80,20 @@ const Registration = (props) => {
             })
             const data = await result.json();
             console.log(data)
+            setLoading(true)
             if (data.code == 200) {
-                toast.success("Registration successfull !", { toastId: 'Registrationsuccess', });
-                setCredentials({ aadhar: "", pan: "", account: "", ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
+                setTimeout(() => {
+                    setLoading(false)
+                    toast.success("Registration successfull !", { toastId: 'Registrationsuccess', });
+                    setCredentials({ aadhar: "", pan: "", account: "", ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
+                }, 2000)
+
             } else {
-                toast.error("Something went wrong ! try again later", { toastId: 'Registrationfail', });
+                setTimeout(() => {
+                    setLoading(false)
+                    toast.error("Something went wrong ! try again later", { toastId: 'Registrationfail', });
+
+                }, 2000)
             }
         } catch (error) {
             console.error('Error:', error);
@@ -122,8 +101,16 @@ const Registration = (props) => {
     }
     return (
         <div >
+            {
+                loading &&
+                <div class="w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50">
+                    <div class="flex justify-center items-center mt-[50vh]">
+                        <div class="fas fa-circle-notch fa-spin fa-5x text-violet-600"></div>
+                    </div>
+                </div>
+            }
             <Wrapper>
-                <div className='md:mt-[20px] md:mb-[20px] md:border-2 md:border-[#18dae4] p-[0px] md:p-[20px]'>
+                <div className='md:mt-[30px] md:mb-[30px] md:border-2 md:border-[#18dae4] md:rounded p-[0px] md:p-[20px]'>
                     <img src="sarte.png" className="w-[110px] h-[110px] m-auto" />
                     <h3 className="text-3xl font-bold text-center mb-2">
                         Registration

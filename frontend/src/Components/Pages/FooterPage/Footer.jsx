@@ -2,8 +2,10 @@ import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram } from "react-icons/fa";
 import Wrapper from "../../Wrapper";
 import PrivacyModal from "./PrivacyModal";
 import TermModal from "./TermModal";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate()
   return (
     <footer className="bg-[#141314] text-white pt-14 pb-3">
       <Wrapper className="flex justify-between flex-col md:flex-row gap-[50px] md:gap-0">
@@ -104,11 +106,13 @@ const Footer = () => {
           {/* <div className=" font-semibold text-white/[0.5] hover:text-white cursor-pointer">
             Guides
           </div> */}
-          <div className="font-semibold text-white/[0.5] hover:text-white cursor-pointer mr-3">
-            <TermModal />
+          <div onClick={() => navigate('/terms&conditions')} className="font-semibold text-white/[0.5] hover:text-white text-[17px] cursor-pointer mr-3">
+            Terms & Conditions
+            {/* <TermModal /> */}
           </div>
-          <div className=" font-semibold text-white/[0.5] hover:text-white cursor-pointer">
-            <PrivacyModal />
+          <div onClick={() => navigate('/privacy&policy')} className=" font-semibold text-white/[0.5] hover:text-white text-[17px] cursor-pointer">
+            Privacy & Policy
+            {/* <PrivacyModal /> */}
           </div>
         </div>
         {/* RIGHT END */}

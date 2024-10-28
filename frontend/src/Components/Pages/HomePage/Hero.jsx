@@ -5,12 +5,14 @@ import hero1 from "../../../assets/home/Home_img1.jpg"
 import hero2 from "../../../assets/home/Home_img2.jpg"
 import hero3 from "../../../assets/home/Home_img3.jpg"
 import hero4 from "../../../assets/home/Home_img4.jpg"
-import Registerbybtn from "../Registration/Registerbybtn";
 import { jwtDecode } from "jwt-decode";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 
 const Hero = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate()
   const handleRegister = async () => {
     const token = localStorage.getItem('token')
     if (token) {
@@ -27,22 +29,22 @@ const Hero = () => {
         })
         const data = await result.json();
         if (data.data.register_status == false) {
-          setIsOpen(true)
+          navigate('/register')
+        }
+        else {
+          toast.warn("You are already registed !", { toastId: 'regbtn1', });
         }
       } catch (error) {
         console.log(error)
       }
     }
-  }
-  const onHide = () => {
-    setIsOpen(false)
+    else {
+      toast.warn("Please do signup or login first !", { toastId: 'regbtn', });
+
+    }
   }
   return (
     <>
-      {
-        isOpen && <Registerbybtn isOpen={isOpen} onHide={onHide} />
-      }
-
       <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto md:mt-0 mt-28">
         <div>
           <span className="block mb-4 text-xs md:text-sm text-[#18dae4] font-medium">
