@@ -47,24 +47,25 @@ const RegisterRepo = async (data) => {
 
 const UpdateStatusRepo = async (data) => {
     try {
-        const email = data.email
+        const email = data.email.toLowerCase()
+        const user = await User.findOne({
+            email: email
+        })
+        if (user) {
+            const updateStatus = {
+                ...user,
+                register_status: true
+            }
 
-        const updateStatus = {
-            ...data,
-            register_status: true
+            const updatedItem = await User.findOneAndUpdate(
+                { email },
+                { $set: updateStatus },
+                { new: true, runValidators: true }
+            );
+            return updatedItem
+
         }
-        console.log(updateStatus)
 
-        const updatedItem = await User.findOneAndUpdate(
-            { email },
-            { $set: updateStatus },
-            { new: true, runValidators: true }
-        );
-        console.log(updatedItem)
-
-
-
-        return updatedItem
     }
     catch (error) {
         console.log("internal server error user", error)
