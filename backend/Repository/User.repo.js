@@ -53,12 +53,14 @@ const UpdateStatusRepo = async (data) => {
             ...data,
             register_status: true
         }
+        console.log(updateStatus)
 
         const updatedItem = await User.findOneAndUpdate(
             { email },
             { $set: updateStatus },
             { new: true, runValidators: true }
         );
+        console.log(updatedItem)
 
 
 
