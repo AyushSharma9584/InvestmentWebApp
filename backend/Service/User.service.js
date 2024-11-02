@@ -38,6 +38,7 @@ const RegisterService = async (req, res) => {
             state,
             pin_code
         }
+        console.log(userData)
 
         const result = await UserRepo.RegisterRepo(userData)
 
