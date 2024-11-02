@@ -66,10 +66,6 @@ const App = () => {
       />
 
       <Menu />
-      {/* {
-        isOpen && <Registration isOpen={isOpen} onHide={onHide} />
-      } */}
-
       <Routing />
       <Footer />
     </div>

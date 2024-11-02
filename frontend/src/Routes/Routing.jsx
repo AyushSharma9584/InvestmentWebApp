@@ -10,8 +10,35 @@ import Login from "../Components/Pages/LoginPage/Login";
 import Registration from "../Components/Pages/Registration/Registration";
 import Privacy from "../Components/Pages/FooterPage/Privacy";
 import Terms from "../Components/Pages/FooterPage/Terms";
+import jwtDecode from 'jwt-decode';
+import { useEffect } from "react";
 
 const Routing = () => {
+  useEffect(() => {
+    checkTokenExpiration();
+  }, []);
+
+  const checkTokenExpiration = () => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      try {
+        const { exp } = jwtDecode(token);
+        const currentTime = Date.now() / 1000;
+        if (exp < currentTime) {
+          localStorage.removeItem('token');
+          console.log("Token has expired, removed from local storage.");
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        localStorage.removeItem('token');
+        window.location.reload();
+      }
+    }
+  };
+
+
   return (
     <>
       <ScrollToTop />
