@@ -71,7 +71,6 @@ const Registration = (props) => {
             }
             console.log(registerData)
             let token = localStorage.getItem('token')
-            console.log(token)
             const result = await fetch(`${import.meta.env.VITE_KEY}user/api/register`, {
                 method: "POST",
                 headers: {
