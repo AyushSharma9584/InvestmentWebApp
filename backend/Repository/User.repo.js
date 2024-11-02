@@ -45,17 +45,19 @@ const RegisterRepo = async (data) => {
 }
 
 
-const UpdateStatusRepo = async (data) => {
+const UpdateStatusRepo = async (em) => {
     try {
-        const email = data.email.toLowerCase()
+        const email = em.toLowerCase()
         const user = await User.findOne({
             email: email
         })
+        console.log(user)
         if (user) {
             const updateStatus = {
                 ...user,
                 register_status: true
             }
+            console.log(updateStatus)
 
             const updatedItem = await User.findOneAndUpdate(
                 { email },

@@ -41,9 +41,9 @@ const RegisterService = async (req, res) => {
 
         const result = await UserRepo.RegisterRepo(userData)
 
-        const updateStatus = await UserRepo.UpdateStatusRepo(userData)
+        const updateStatus = await UserRepo.UpdateStatusRepo(em)
         console.log(updateStatus)
-        console.log(result)
+        // console.log(result)
 
 
         if (!updateStatus || !result) {
