@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Registration = (props) => {
-    const [credentials, setCredentials] = useState({ aadhar: "", pan: "", account: "", ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
+    const [credentials, setCredentials] = useState({ aadhar: null, pan: null, account: null, ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
     const [info, setInfo] = useState({ name: "", email: "" })
     const [valid, setValid] = useState({ aadhaar: false, account: false, pan: false, ifsc: false })
     const [error, setError] = useState(false)
@@ -87,7 +87,7 @@ const Registration = (props) => {
                 setTimeout(() => {
                     setLoading(false)
                     toast.success("Registration successfull !", { toastId: 'Registrationsuccess', });
-                    setCredentials({ aadhar: "", pan: "", account: "", ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
+                    setCredentials({ aadhar: null, pan: null, account: null, ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
                 }, 2000)
 
             } else {
