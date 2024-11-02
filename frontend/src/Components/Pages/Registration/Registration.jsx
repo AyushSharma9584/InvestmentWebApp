@@ -91,7 +91,7 @@ const Registration = (props) => {
                     setCredentials({ aadhar: null, pan: null, account: null, ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
                     setTimeout(() => {
                         navigate("/")
-                    }, 1000)
+                    }, 3000)
                 }, 2000)
 
             } else {
