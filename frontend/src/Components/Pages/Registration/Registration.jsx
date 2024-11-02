@@ -5,6 +5,7 @@ import { FaXmark } from "react-icons/fa6";
 import Wrapper from '../../Wrapper';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 const Registration = (props) => {
     const [credentials, setCredentials] = useState({ aadhar: null, pan: null, account: null, ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
@@ -12,6 +13,7 @@ const Registration = (props) => {
     const [valid, setValid] = useState({ aadhaar: false, account: false, pan: false, ifsc: false })
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
     useEffect(() => {
         const token = localStorage.getItem('token')
         const decoded = jwtDecode(token);
@@ -87,6 +89,7 @@ const Registration = (props) => {
                     setLoading(false)
                     toast.success("Registration successfull !", { toastId: 'Registrationsuccess', });
                     setCredentials({ aadhar: null, pan: null, account: null, ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
+                    navigate('/')
                 }, 2000)
 
             } else {
