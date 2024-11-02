@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "../Components/Pages/HomePage/Home";
 import ScrollToTop from "./ScrollToTop";
 import Blog from "../Components/Pages/BlogPage/Blog";
@@ -10,33 +10,35 @@ import Login from "../Components/Pages/LoginPage/Login";
 import Registration from "../Components/Pages/Registration/Registration";
 import Privacy from "../Components/Pages/FooterPage/Privacy";
 import Terms from "../Components/Pages/FooterPage/Terms";
-import jwtDecode from 'jwt-decode';
 import { useEffect } from "react";
 
 const Routing = () => {
+  const navigate = useNavigate()
   useEffect(() => {
-    checkTokenExpiration();
-  }, []);
-
-  const checkTokenExpiration = () => {
     const token = localStorage.getItem('token');
 
     if (token) {
-      try {
-        const { exp } = jwtDecode(token);
-        const currentTime = Date.now() / 1000;
-        if (exp < currentTime) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const decodedPayload = JSON.parse(atob(base64));
+      const { exp } = decodedPayload;
+      const currentTime = Date.now() / 1000;
+      const timeUntilExpiry = (exp - currentTime) * 1000;
+      console.log(timeUntilExpiry)
+      if (timeUntilExpiry > 0) {
+        const timeout = setTimeout(() => {
           localStorage.removeItem('token');
-          console.log("Token has expired, removed from local storage.");
           window.location.reload();
-        }
-      } catch (error) {
-        console.error("Error decoding token:", error);
+        }, timeUntilExpiry);
+        return () => clearTimeout(timeout);
+      } else {
         localStorage.removeItem('token');
         window.location.reload();
       }
     }
-  };
+  }, []);
+
+
 
 
   return (

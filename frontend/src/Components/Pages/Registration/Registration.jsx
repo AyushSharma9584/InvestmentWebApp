@@ -18,6 +18,30 @@ const Registration = (props) => {
         const token = localStorage.getItem('token')
         const decoded = jwtDecode(token);
         setInfo({ name: decoded.userName, email: decoded.userEmail })
+        if (token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const decodedPayload = JSON.parse(atob(base64));
+            const { exp } = decodedPayload;
+            const currentTime = Date.now() / 1000;
+            const timeUntilExpiry = (exp - currentTime) * 1000;
+            console.log(timeUntilExpiry)
+            if (timeUntilExpiry > 0) {
+                const timeout = setTimeout(() => {
+                    localStorage.removeItem('token');
+                    navigate("/")
+                    window.location.reload();
+
+                }, timeUntilExpiry);
+                return () => clearTimeout(timeout);
+            } else {
+                localStorage.removeItem('token');
+                navigate("/")
+                window.location.reload();
+
+            }
+        }
+
     }, [valid])
     const handleSubmit = () => {
         props.onHide()
@@ -26,6 +50,7 @@ const Registration = (props) => {
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
+
 
 
 

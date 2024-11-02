@@ -17,6 +17,28 @@ const App = () => {
     }
 
   }, [])
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const decodedPayload = JSON.parse(atob(base64));
+      const { exp } = decodedPayload;
+      const currentTime = Date.now() / 1000;
+      const timeUntilExpiry = (exp - currentTime) * 1000;
+      if (timeUntilExpiry > 0) {
+        const timeout = setTimeout(() => {
+          localStorage.removeItem('token');
+          window.location.reload();
+        }, timeUntilExpiry);
+        return () => clearTimeout(timeout);
+      } else {
+        localStorage.removeItem('token');
+        window.location.reload();
+      }
+    }
+  }, []);
 
   useEffect(() => {
     hitApi()
