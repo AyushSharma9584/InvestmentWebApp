@@ -89,7 +89,9 @@ const Registration = (props) => {
                     setLoading(false)
                     toast.success("Registration successfull !", { toastId: 'Registrationsuccess', });
                     setCredentials({ aadhar: null, pan: null, account: null, ifsc: "", bank: "", city: "", state: "", pin: "", upi: "" })
-                    navigate('/')
+                    setTimeout(() => {
+                        navigate("/")
+                    }, 1000)
                 }, 2000)
 
             } else {
