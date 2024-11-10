@@ -24,11 +24,11 @@ const AddController = async (req, res) => {
         if (!createdAdmin) {
             return res.status(400).json({ message: "Failed to create Admin" })
         }
-        return {
-            message: "Admin created successfully",
+        return res.status(400).json({
+            message: "Admin created successfully !!",
             code: 200,
-            data: createdAdmin
-        }
+            status: "success"
+        })
 
 
     } catch (error) {
