@@ -30,6 +30,7 @@ const Menu = () => {
   const [show, setShow] = useState("translate-y-0");
   const [key, setKey] = useState("")
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [adminId, setAdminId] = useState("");
   const iconRef = useRef(null);
 
   const handleChange = (e) => {
@@ -120,7 +121,7 @@ const Menu = () => {
         body: JSON.stringify(loginData)
       })
       const data = await result.json();
-      console.log(data)
+
 
       if (data.message == "Email not found") {
         toast.error("Email not found !", { toastId: 'loginerror1', })
@@ -134,7 +135,9 @@ const Menu = () => {
 
       if (data.code == 200) {
         toast.success("Login successfull !", { toastId: 'loginsuccess', });
+        const decoded = jwtDecode(data.token);
         setIsView(false)
+        setAdminId(decoded.userId)
         localStorage.setItem('token', data.token);
         setLoginVal({ email: "", password: "" })
       }
@@ -208,6 +211,7 @@ const Menu = () => {
           <MenuDesktop
             showCatMenu={showCatMenu}
             setShowCatMenu={setShowCatMenu}
+            userId={adminId}
           />
 
           {mobileMenu && (
@@ -215,6 +219,7 @@ const Menu = () => {
               showCatMenu={showCatMenu}
               setShowCatMenu={setShowCatMenu}
               setMobileMenu={setMobileMenu}
+              userId={adminId}
             />
           )}
 
