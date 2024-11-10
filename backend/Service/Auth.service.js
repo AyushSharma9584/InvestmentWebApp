@@ -95,11 +95,42 @@ const LoginService = async (req, res) => {
 
         const result = await UserRepo.getUserByEmailRepo(email);
         if (result.data == null) {
-            return res.status(400).json({
-                status: "failed",
-                message: "Email not found",
-                code: 400
-            })
+            const Adminresult = await UserRepo.getAdminByEmailRepo(email);
+            if (Adminresult.data == null) {
+                return res.status(400).json({
+                    status: "failed",
+                    message: "Email not found",
+                    code: 400
+                })
+            } else {
+                const comparePassword = await hashing.comparePassword(password, Adminresult.data.password);
+                if (!comparePassword) {
+                    return res.status(400).json({
+                        status: "failed",
+                        message: "Please enter correct password",
+                        code: 400
+                    })
+                }
+                const userId = result.data._id;
+                const userEmail = result.data.email.toLowerCase();
+                const userName = result.data.name;
+
+                const token = createToken(userId, userEmail, userName);
+
+                return res.status(200).json({
+                    status: "success",
+                    message: "Login Successfull !!!...",
+                    code: 200,
+                    token: token
+                })
+
+            }
+
+            // return res.status(400).json({
+            //     status: "failed",
+            //     message: "Email not found",
+            //     code: 400
+            // })
         }
 
         const comparePassword = await hashing.comparePassword(password, result.data.password);

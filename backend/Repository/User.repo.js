@@ -1,5 +1,6 @@
 const User = require('../Model/User.model')
 const register = require('../Model/Register.model')
+const Admin = require("../Model/Admin.model")
 
 
 const getUserByEmailRepo = async (email) => {
@@ -30,6 +31,37 @@ const getUserByEmailRepo = async (email) => {
         throw error;
     }
 }
+
+
+const getAdminByEmailRepo = async (email) => {
+    try {
+        const em = email.toLowerCase()
+        const admin = await Admin.findOne({
+            email: em
+        })
+        if (admin) {
+            return {
+                message: "Admin existed...",
+                code: 200,
+                data: admin
+            }
+        }
+        else {
+            return {
+                message: "Admin not existed...",
+                code: 201,
+                data: null
+            }
+        }
+
+
+    }
+    catch (error) {
+        console.log("internal server error user", error)
+        throw error;
+    }
+}
+
 
 
 const RegisterRepo = async (data) => {
@@ -72,5 +104,5 @@ const UpdateStatusRepo = async (em) => {
 }
 
 module.exports = {
-    getUserByEmailRepo, RegisterRepo, UpdateStatusRepo
+    getUserByEmailRepo, RegisterRepo, UpdateStatusRepo, getAdminByEmailRepo
 }
