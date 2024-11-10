@@ -11,6 +11,7 @@ import Registration from "../Components/Pages/Registration/Registration";
 import Privacy from "../Components/Pages/FooterPage/Privacy";
 import Terms from "../Components/Pages/FooterPage/Terms";
 import { useEffect } from "react";
+import History from "../Components/Pages/Admin/History";
 
 const Routing = () => {
   const navigate = useNavigate()
@@ -55,6 +56,7 @@ const Routing = () => {
         <Route path="/privacy&policy" element={<Privacy />} />
         <Route path="/terms&conditions" element={<Terms />} />
         <Route path="/login-user" element={<Login />} />
+        <Route path="/history" element={<History />} />
       </Routes>
     </>
   );

@@ -1,10 +1,19 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
-const MenuDesktop = (props) => {
+const MenuDesktop = () => {
   const [showCatMenu, setShowCatMenu] = useState(false);
+  const [adminId, setAdminId] = useState("");
+  useEffect(() => {
+    let val = localStorage.getItem("token")
+    if (val) {
+      const decoded = jwtDecode(val);
+      setAdminId(decoded.userId)
+    }
+  }, [data, adminId])
 
   const data = [
     { id: 1, name: "Home", url: "/" },
@@ -21,7 +30,7 @@ const MenuDesktop = (props) => {
     <div>
       <ul className="hidden md:flex items-center gap-3 font-semibold">
         {data.map((item) =>
-          item.name == "History" && props.userId != "6730b94946dc3ec098393190" ? null :
+          item.name == "History" && adminId != "6730b94946dc3ec098393190" ? null :
             (
               <li
                 key={item.id}

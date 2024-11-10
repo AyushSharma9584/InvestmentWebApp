@@ -1,7 +1,17 @@
 /* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 
-const MenuMobile = ({ setMobileMenu, userId }) => {
+const MenuMobile = ({ setMobileMenu }) => {
+
+  const [adminId, setAdminId] = useState("");
+  useEffect(() => {
+    let val = localStorage.getItem("token")
+    if (val) {
+      const decoded = jwtDecode(val);
+      setAdminId(decoded.userId)
+    }
+  }, [data, adminId])
+
   const data = [
     { id: 1, name: "Home", url: "/" },
     { id: 2, name: "Blog", url: "/blog" },
