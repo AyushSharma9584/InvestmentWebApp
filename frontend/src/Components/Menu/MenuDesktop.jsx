@@ -12,8 +12,10 @@ const MenuDesktop = () => {
     if (val) {
       const decoded = jwtDecode(val);
       setAdminId(decoded.userId)
+    } else {
+      setAdminId("")
     }
-  }, [data, adminId])
+  }, [adminId])
 
   const data = [
     { id: 1, name: "Home", url: "/" },

@@ -10,7 +10,10 @@ const MenuMobile = ({ setMobileMenu }) => {
       const decoded = jwtDecode(val);
       setAdminId(decoded.userId)
     }
-  }, [data, adminId])
+    else {
+      setAdminId("")
+    }
+  }, [adminId])
 
   const data = [
     { id: 1, name: "Home", url: "/" },
