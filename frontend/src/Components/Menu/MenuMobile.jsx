@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 import { NavLink } from "react-router-dom";
 
 const MenuMobile = ({ setMobileMenu }) => {
