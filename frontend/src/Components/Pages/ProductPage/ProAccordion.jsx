@@ -262,8 +262,8 @@ const ProAccordion = () => {
           className="overflow-hidden"
         >
           <div className="p-4 text-sm leading-normal text-blue-gray-500/80">
-            Typically, returns are credited to your bank account on the first
-            Monday of each month. However, some investment plans may allow for
+            Typically, returns are credited to your bank account on the second
+            day of each month. However, some investment plans may allow for
             withdrawals at different times. Please review the terms and
             conditions of your plan to understand the options available for
             withdrawing returns.
