@@ -33,6 +33,16 @@ router.delete('/delete_user', isAuthenticate, async (req, res) => {
     }
 })
 
+router.get('/get_kyc', isAuthenticate, async (req, res) => {
+    try {
+        const result = await UserController.GetKycController(req, res);
+        return result
+    } catch (error) {
+        console.log("error in router " + error)
+        return res.status(400).json({ error: "internal server error router" })
+    }
+})
+
 router.post('/support', async (req, res) => {
     try {
         const result = await UserController.SupportController(req, res);

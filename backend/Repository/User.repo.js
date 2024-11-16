@@ -89,6 +89,17 @@ const GetAllRepo = async () => {
     }
 }
 
+const GetKycRepo = async (email) => {
+    try {
+        const user = await register.findOne({ email: email })
+        return user
+    }
+    catch (error) {
+        console.log("internal server error user", error)
+        throw error;
+    }
+}
+
 const DeleteUserRepo = async (email) => {
     try {
         let user = await User.findOne({ email: email })
@@ -152,5 +163,6 @@ const SupportRepo = async (data) => {
 }
 
 module.exports = {
-    getUserByEmailRepo, RegisterRepo, UpdateStatusRepo, getAdminByEmailRepo, SupportRepo, GetAllRepo, DeleteUserRepo
+    getUserByEmailRepo, RegisterRepo, UpdateStatusRepo, getAdminByEmailRepo, SupportRepo, GetAllRepo, DeleteUserRepo,
+    GetKycRepo
 }
