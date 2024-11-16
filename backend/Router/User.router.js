@@ -13,4 +13,14 @@ router.post('/register', isAuthenticate, async (req, res) => {
     }
 })
 
+router.post('/support', async (req, res) => {
+    try {
+        const result = await UserController.SupportController(req, res);
+        return result
+    } catch (error) {
+        console.log("error in router " + error)
+        return res.status(400).json({ error: "internal server error router" })
+    }
+})
+
 module.exports = router;

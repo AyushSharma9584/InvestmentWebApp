@@ -59,7 +59,37 @@ const RegisterService = async (req, res) => {
     }
 }
 
+const SupportService = async (req, res) => {
+    try {
+        let { name, email, phone, message } = req.body;
+        if (!name || !email || !phone || !message) {
+            return res.status(400).json({ error: "Please fill all the fields" })
+        }
+        phone = Number(phone);
+        const data = {
+            name,
+            email,
+            phone,
+            message
+        }
+        const result = await UserRepo.SupportRepo(data)
+        if (!result) {
+            return res.status(404).json({ error: "support request not sent" })
+        } else {
+            return res.status(200).json({
+                status: "success",
+                message: "Message sent successfully !",
+                code: 200
+            })
+        }
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error service" })
+    }
+}
+
 
 module.exports = {
-    RegisterService
+    RegisterService,
+    SupportService
 }

@@ -1,6 +1,8 @@
 const User = require('../Model/User.model')
 const register = require('../Model/Register.model')
 const Admin = require("../Model/Admin.model")
+const Support = require("../Model/support")
+
 
 
 const getUserByEmailRepo = async (email) => {
@@ -66,8 +68,8 @@ const getAdminByEmailRepo = async (email) => {
 
 const RegisterRepo = async (data) => {
     try {
-        const Register = await new register(data)
-        const add = Register.save()
+        const Register = new register(data)
+        const add = await Register.save()
         return add
     }
     catch (error) {
@@ -103,6 +105,20 @@ const UpdateStatusRepo = async (em) => {
     }
 }
 
+
+
+const SupportRepo = async (data) => {
+    try {
+        const support = new Support(data)
+        const add = await support.save()
+        return add
+    }
+    catch (error) {
+        console.log("internal server error user", error)
+        throw error;
+    }
+}
+
 module.exports = {
-    getUserByEmailRepo, RegisterRepo, UpdateStatusRepo, getAdminByEmailRepo
+    getUserByEmailRepo, RegisterRepo, UpdateStatusRepo, getAdminByEmailRepo, SupportRepo
 }
