@@ -23,7 +23,7 @@ router.get('/get_all_users', isAuthenticate, async (req, res) => {
     }
 })
 
-router.get('/delete_user', isAuthenticate, async (req, res) => {
+router.delete('/delete_user', isAuthenticate, async (req, res) => {
     try {
         const result = await UserController.DeleteUserController(req, res);
         return result
