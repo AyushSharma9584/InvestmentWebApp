@@ -22,6 +22,16 @@ const GetAllController = async (req, res) => {
     }
 }
 
+const DeleteUserController = async (req, res) => {
+    try {
+        const result = await UserService.DeleteUserService(req, res);
+        return result;
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error controller" })
+    }
+}
+
 const SupportController = async (req, res) => {
     try {
         const result = await UserService.SupportService(req, res);
@@ -36,6 +46,7 @@ const SupportController = async (req, res) => {
 module.exports = {
     RegisterController,
     SupportController,
-    GetAllController
+    GetAllController,
+    DeleteUserController
 
 }

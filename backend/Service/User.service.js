@@ -61,6 +61,7 @@ const RegisterService = async (req, res) => {
 
 const GetAllService = async (req, res) => {
     try {
+
         const result = await UserRepo.GetAllRepo()
         if (result.length == 0) {
             return res.status(404).send('no data found')
@@ -70,6 +71,25 @@ const GetAllService = async (req, res) => {
             status: "success",
             message: "data fetched successfully",
             data: result
+        })
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error service" })
+    }
+}
+
+
+const DeleteUserService = async (req, res) => {
+    try {
+        const { email } = req.body;
+        const result = await UserRepo.DeleteUserRepo(email)
+        if (!result) {
+            return res.status(404).send('Something went wrong ! try again later..')
+        }
+        return res.status(200).json({
+            code: 200,
+            status: "success",
+            message: "data deleted successfully !"
         })
 
     } catch (error) {
@@ -117,5 +137,5 @@ const SupportService = async (req, res) => {
 module.exports = {
     RegisterService,
     SupportService,
-    GetAllService
+    GetAllService, DeleteUserService
 }
