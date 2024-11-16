@@ -66,6 +66,13 @@ const SupportService = async (req, res) => {
             return res.status(400).json({ error: "Please fill all the fields" })
         }
         phone = Number(phone);
+        if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+            return res.status(400).json({ error: 'Invalid email format' });
+        }
+
+        if (!/^\d{10}$/.test(phone)) {
+            return res.status(400).json({ error: 'Phone number must be 10 digits' });
+        }
         const data = {
             name,
             email,
