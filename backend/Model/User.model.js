@@ -14,7 +14,16 @@ const UserSchema = new mongoose.Schema({
     register_status: {
         type: Boolean,
         default: false
-    }
+    },
+    approval_status: {
+        type: String,
+        default: "Pending"
+    },
+    created_date: {
+        type: Date,
+        default: Date.now,
+    },
+
 
 })
 

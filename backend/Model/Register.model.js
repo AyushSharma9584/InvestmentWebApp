@@ -33,7 +33,19 @@ const UserRegisterSchema = new mongoose.Schema({
     },
     pin_code: {
         type: Number
-    }
+    },
+    approval_status: {
+        type: String,
+        default: "Pending"
+    },
+    created_date: {
+        type: Date,
+        default: Date.now,
+    },
+    updated_date: {
+        type: Date,
+        default: ""
+    },
 
 })
 

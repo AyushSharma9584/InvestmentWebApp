@@ -379,12 +379,20 @@ const History = () => {
 
 
         <div className='mt-[2em]'>
+
+
+
+
             {
+
 
                 userId != "6730b94946dc3ec098393190" ? <h1 style={{ textAlign: "center", color: "white", marginTop: "30px", marginBottom: "30px", fontSize: "25px" }}>You are not allowed to access this route!!</h1> :
                     <>
                         <Wrapper>
+
                             <h1 className="flex flex-col items-center text-center justify-center sm:text-5xl text-3xl overflow-hidden">
+
+
                                 <motion.span
                                     initial={{ y: "70%", opacity: 0 }}
                                     whileInView={{ y: 0, opacity: 1 }}
@@ -405,6 +413,17 @@ const History = () => {
                             {/* <div className='md:mt-[30px] md:mb-[30px] md:border-2 md:border-[#18dae4] md:rounded p-[0px] md:p-[20px]' >
 
                 </div> */}
+                            <div>
+                                <ul class="flex flex-wrap text-sm font-medium text-center text-white-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+                                    <li class="me-2">
+                                        <a href="#" aria-current="page" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">User Info</a>
+                                    </li>
+                                    <li class="me-2">
+                                        <a href="#" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Support</a>
+                                    </li>
+
+                                </ul>
+                            </div>
 
                             <div className=" flex  items-center justify-center pt-10 pb-14">
                                 <div className="w-full  px-2">
@@ -413,7 +432,7 @@ const History = () => {
                                 Tailwind Table With Pagination
                             </h1>
                         </div> */}
-                                    <div className="w-full overflow-x-scroll md:overflow-auto  max-w-7xl 2xl:max-w-none mt-2">
+                                    <div className="w-full overflow-x-scroll md:overflow-auto  max-w-7xl 2xl:max-w-none ">
                                         <table className="table-auto overflow-scroll md:overflow-auto w-full text-left font-inter border-2 border-[#18dae4] ">
                                             <thead className="rounded-lg text-base text-white font-semibold w-full">
                                                 <tr className="">
