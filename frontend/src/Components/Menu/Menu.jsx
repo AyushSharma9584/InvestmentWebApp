@@ -13,7 +13,7 @@ import MenuMobile from "./MenuMobile";
 import MenuDesktop from "./MenuDesktop";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SignUp from "../Pages/SignupPage/SignUp";
+
 
 const Menu = () => {
   const dropdownRef = useRef(null);
@@ -30,6 +30,8 @@ const Menu = () => {
   const [show, setShow] = useState("translate-y-0");
   const [key, setKey] = useState("")
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [lock1, setLock1] = useState(false)
+  const [lock2, setLock2] = useState(false)
   const iconRef = useRef(null);
 
   const handleChange = (e) => {
@@ -64,6 +66,7 @@ const Menu = () => {
         email: credentials.email,
         password: credentials.password
       }
+      setLock1(true)
       const result = await fetch(`${import.meta.env.VITE_KEY}auth/api/signup`, {
         method: "POST",
         headers: {
@@ -72,27 +75,30 @@ const Menu = () => {
         body: JSON.stringify(signupData)
       })
       const data = await result.json();
-      console.log(data)
 
       if (data.message == "Please provide a valid email address.") {
-        alert("enter a valid email")
+        toast.error("Enter a valid email !");
+        setLock1(false)
         return
       }
 
       if (data.message == "User already existed with the email") {
         toast.error("User already exists with this email !");
+        setLock1(false)
         return
       }
 
       if (data.code == 200) {
         toast.success("Signup successfull !", { toastId: 'signupsuccess', });
         setIsOpen(false)
+        setLock1(false)
         localStorage.setItem('token', data.token)
         setCredentials({ name: "", email: "", password: "" })
       }
     } catch (error) {
       console.error('Error:', error);
-      // toast.error("Server loss !!!");
+      setLock1(false)
+      toast.error("Server loss !!!");
     }
   }
 
@@ -111,7 +117,7 @@ const Menu = () => {
         email: loginVal.email,
         password: loginVal.password
       }
-      console.log(loginData)
+      setLock2(true)
       const result = await fetch(`${import.meta.env.VITE_KEY}auth/api/login`, {
         method: "POST",
         headers: {
@@ -124,11 +130,13 @@ const Menu = () => {
 
       if (data.message == "Email not found") {
         toast.error("Email not found !", { toastId: 'loginerror1', })
+        setLock2(false)
         return
       }
 
       if (data.message == "Please enter correct password") {
         toast.error("Please enter correct password !", { toastId: 'loginerror2', });
+        setLock2(false)
         return
       }
 
@@ -136,12 +144,14 @@ const Menu = () => {
         toast.success("Login successfull !", { toastId: 'loginsuccess', });
         const decoded = jwtDecode(data.token);
         setIsView(false)
+        setLock2(false)
         localStorage.setItem('token', data.token);
         setLoginVal({ email: "", password: "" })
       }
     } catch (error) {
       console.error('Error:', error);
-      // toast.error("Server loss !!!");
+      setLock2(false)
+      toast.error("Server loss !!!");
     }
   }
 
@@ -325,7 +335,7 @@ const Menu = () => {
                       <div className="flex gap-2  justify-center">
                         <button
                           onClick={signupHandle}
-                          className="bg-[#18dae4] transition-all hover:bg-[#0b9198]  text-black hover:text-white font-semibold  py-2 rounded w-60"
+                          className={`${lock1 ? "bg-gray-400 text-gray-700 cursor-not-allowed" : "bg-[#18dae4] transition-all hover:bg-[#0b9198]  text-black hover:text-white"} font-semibold  py-2 rounded w-60`}
                         >
                           SignUp
                         </button>
@@ -393,7 +403,7 @@ const Menu = () => {
                       <div className="flex gap-2  justify-center">
                         <button
                           onClick={loginHandle}
-                          className="bg-[#18dae4] transition-all hover:bg-[#0b9198]  text-black hover:text-white font-semibold  py-2 rounded w-60"
+                          className={` ${lock2 ? "bg-gray-400 text-gray-700 cursor-not-allowed" : "bg-[#18dae4] transition-all hover:bg-[#0b9198]  text-black hover:text-white"} font-semibold  py-2 rounded w-60`}
                         >
                           Login
                         </button>

@@ -5,8 +5,8 @@ import Blog from "../Components/Pages/BlogPage/Blog";
 import Contact from "../Components/Pages/ContactPage/Contact";
 import Products from "../Components/Pages/ProductPage/Products";
 import Knowledge from "../Components/Pages/KnowledgePage/Knowledge";
-import SignUp from "../Components/Pages/SignupPage/SignUp";
-import Login from "../Components/Pages/LoginPage/Login";
+// import SignUp from "../Components/Pages/SignupPage/SignUp";
+// import Login from "../Components/Pages/LoginPage/Login";
 import Registration from "../Components/Pages/Registration/Registration";
 import Privacy from "../Components/Pages/FooterPage/Privacy";
 import Terms from "../Components/Pages/FooterPage/Terms";
@@ -52,10 +52,10 @@ const Routing = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/knowledge" element={<Knowledge />} />
-        <Route path="/create-user" element={<SignUp />} />
+        {/* <Route path="/create-user" element={<SignUp />} /> */}
         <Route path="/privacy&policy" element={<Privacy />} />
         <Route path="/terms&conditions" element={<Terms />} />
-        <Route path="/login-user" element={<Login />} />
+        {/* <Route path="/login-user" element={<Login />} /> */}
         <Route path="/history" element={<History />} />
       </Routes>
     </>
