@@ -1,6 +1,80 @@
 import { motion } from "framer-motion";
+import React, { useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 
 const ContactInput = () => {
+  const [credentials, setCredentials] = useState({ name: "", email: "", phone: "", message: "" })
+  const [error, setError] = useState(false)
+  const [email, setEmail] = useState(false)
+  const [phone, setPhone] = useState(false)
+  const [lock, setLock] = useState(false)
+
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value })
+  }
+
+  const handleSupport = async (e) => {
+    e.preventDefault();
+    setEmail(false)
+    setPhone(false)
+    if (!credentials.name || !credentials.email || !credentials.phone || !credentials.message) {
+      setError(true)
+      return
+    }
+    else {
+      setError(false)
+    }
+
+    try {
+      const supportData = {
+        name: credentials.name,
+        email: credentials.email,
+        phone: credentials.phone,
+        message: credentials.message,
+      }
+      console.log(supportData)
+      setLock(true)
+
+      const result = await fetch(`${import.meta.env.VITE_KEY}user/api/support`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(supportData)
+      })
+      const data = await result.json();
+      if (data.error == "Invalid email format") {
+        setEmail(true)
+        setLock(false)
+        return
+      } if (data.error == "Phone number must be 10 digits") {
+        setPhone(true)
+        setLock(false)
+        return
+      }
+
+      console.log(data)
+      if (data.code == 200) {
+        setTimeout(() => {
+          toast.success("Message sent !", { toastId: 'Messagesuccess', });
+          setCredentials({ name: "", email: "", phone: "", message: "" })
+          setLock(false)
+          setEmail(false)
+          setPhone(false)
+
+        }, 2000)
+
+      } else {
+        setTimeout(() => {
+          toast.error("Something went wrong ! try again later", { toastId: 'Messagefail', });
+          setLock(false)
+
+        }, 2000)
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   return (
     <div className="contact-form">
@@ -30,39 +104,59 @@ const ContactInput = () => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ ease: [0.22, 1, 0.36, 1], duration: 1 }}
         >
-          <form>
+          <form onSubmit={handleSupport}>
             <input
               type="text"
-              name="username"
+              name="name"
               required
+              onChange={handleChange}
+              value={credentials.name}
               className="input"
               placeholder="your name"
             />
+            {error && credentials.name == "" ? <p className='text-sm text-start ms-4 mb-5' ><i>Please enter name</i></p> : " "}
             <input
               type="email"
               name="email"
               required
+              value={credentials.email}
+              onChange={handleChange}
               className="input"
               placeholder="your email"
             />
+            {error && credentials.email == "" ? <p className='text-sm text-start ms-4 mb-5' ><i>Please enter Email</i></p> : " "}
+            {email && <p className='text-sm text-start ms-4 mb-5' ><i>Please enter a valid email</i></p>}
             <input
               type="text"
-              name="subject"
+              name="phone"
               required
+              value={credentials.phone}
+              onChange={handleChange}
               className="input"
               placeholder="your Number"
             />
+            {error && credentials.phone == "" ? <p className='text-sm text-start ms-4 mb-5' ><i>Please enter Phone number</i></p> : " "}
+            {phone && <p className='text-sm text-start ms-4 mb-5' ><i>Please enter a valid Phone number</i></p>}
             <textarea
               className="input overflow-y-auto overflow-x-hidden"
               cols="30"
               rows="5"
+              name="message"
+              value={credentials.message}
+              onChange={handleChange}
               placeholder="Your message..."
             ></textarea>
+            {error && credentials.message == "" ? <p className='text-sm text-start ms-4 mb-5' ><i>Please enter detail</i></p> : " "}
             <input
               type="submit"
-              className="bg-[#18dae4] text-black font-medium py-2 px-10 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95"
+              className={`${lock
+                ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                : "bg-[#18dae4] text-black hover:bg-[#0b9198] hover:text-white"
+                } font-medium py-2 px-10 rounded transition-all active:scale-95`}
               value="Send Message"
+              disabled={lock}
             />
+
           </form>
         </motion.div>
       </div>
