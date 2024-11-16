@@ -59,6 +59,24 @@ const RegisterService = async (req, res) => {
     }
 }
 
+const GetAllService = async (req, res) => {
+    try {
+        const result = await UserRepo.GetAllRepo()
+        if (result.length == 0) {
+            return res.status(404).send('no data found')
+        }
+        return res.status(200).json({
+            code: 200,
+            status: "success",
+            message: "data fetched successfully",
+            data: result
+        })
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error service" })
+    }
+}
+
 const SupportService = async (req, res) => {
     try {
         let { name, email, phone, message } = req.body;
@@ -98,5 +116,6 @@ const SupportService = async (req, res) => {
 
 module.exports = {
     RegisterService,
-    SupportService
+    SupportService,
+    GetAllService
 }

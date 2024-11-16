@@ -78,6 +78,17 @@ const RegisterRepo = async (data) => {
     }
 }
 
+const GetAllRepo = async () => {
+    try {
+        const user = await User.find()
+        return user
+    }
+    catch (error) {
+        console.log("internal server error user", error)
+        throw error;
+    }
+}
+
 
 const UpdateStatusRepo = async (em) => {
     try {
@@ -120,5 +131,5 @@ const SupportRepo = async (data) => {
 }
 
 module.exports = {
-    getUserByEmailRepo, RegisterRepo, UpdateStatusRepo, getAdminByEmailRepo, SupportRepo
+    getUserByEmailRepo, RegisterRepo, UpdateStatusRepo, getAdminByEmailRepo, SupportRepo, GetAllRepo
 }
