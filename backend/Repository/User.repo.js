@@ -38,11 +38,9 @@ const getUserByEmailRepo = async (email) => {
 const getAdminByEmailRepo = async (email) => {
     try {
         const em = email.toLowerCase()
-        console.log(em)
         const admin = await Admin.findOne({
             email: em
         })
-        console.log(admin)
         if (admin) {
             return {
                 message: "Admin existed...",

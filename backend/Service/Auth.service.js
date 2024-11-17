@@ -111,11 +111,9 @@ const LoginService = async (req, res) => {
                         code: 400
                     })
                 }
-                console.log(result)
-                console.log(result.data)
-                const userId = result.data._id;
-                const userEmail = result.data.email.toLowerCase();
-                const userName = result.data.name;
+                const userId = Adminresult.data._id;
+                const userEmail = Adminresult.data.email.toLowerCase();
+                const userName = Adminresult.data.name;
 
                 const token = createToken(userId, userEmail, userName);
 
@@ -128,11 +126,6 @@ const LoginService = async (req, res) => {
 
             }
 
-            // return res.status(400).json({
-            //     status: "failed",
-            //     message: "Email not found",
-            //     code: 400
-            // })
         }
 
         const comparePassword = await hashing.comparePassword(password, result.data.password);
