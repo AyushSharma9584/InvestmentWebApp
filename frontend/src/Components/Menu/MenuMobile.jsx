@@ -31,7 +31,7 @@ const MenuMobile = ({ setMobileMenu }) => {
     <div>
       <ul className="flex flex-col md:hidden font-bold absolute top-[60px] left-0 w-full h-[calc(100vh-60px)] bg-[#141314] border-t-[1px]">
         {data.map((item) =>
-          item.name == "History" && adminId != "6730b94946dc3ec098393190" ? null :
+          item.name == "History" && adminId != "6730b71d071d46fd90b2e0f3" ? null :
             (
               <NavLink
                 key={item.id}

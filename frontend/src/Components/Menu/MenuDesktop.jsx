@@ -32,7 +32,7 @@ const MenuDesktop = () => {
     <div>
       <ul className="hidden md:flex items-center gap-3 font-semibold">
         {data.map((item) =>
-          item.name == "History" && adminId != "6730b94946dc3ec098393190" ? null :
+          item.name == "History" && adminId != "6730b71d071d46fd90b2e0f3" ? null :
             (
               <li
                 key={item.id}

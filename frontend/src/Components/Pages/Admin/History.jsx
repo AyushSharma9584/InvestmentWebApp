@@ -386,7 +386,7 @@ const History = () => {
             {
 
 
-                userId != "6730b94946dc3ec098393190" ? <h1 style={{ textAlign: "center", color: "white", marginTop: "30px", marginBottom: "30px", fontSize: "25px" }}>You are not allowed to access this route!!</h1> :
+                userId != "6730b71d071d46fd90b2e0f3" ? <h1 style={{ textAlign: "center", color: "white", marginTop: "30px", marginBottom: "30px", fontSize: "25px" }}>You are not allowed to access this route!!</h1> :
                     <>
                         <Wrapper>
 
