@@ -111,6 +111,8 @@ const LoginService = async (req, res) => {
                         code: 400
                     })
                 }
+                console.log(result)
+                console.log(result.data)
                 const userId = result.data._id;
                 const userEmail = result.data.email.toLowerCase();
                 const userName = result.data.name;
