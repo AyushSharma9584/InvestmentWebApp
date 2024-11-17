@@ -77,6 +77,37 @@ const RegisterRepo = async (data) => {
         throw error;
     }
 }
+const ApprovalRepo = async (data) => {
+    try {
+        const { status, email } = data;
+        let updatedItem;
+
+        if (status === "Approved") {
+            updatedItem = await register.findOneAndUpdate(
+                { email },
+                { $set: { approval_status: "Approved", updated_date: Date.now() } },
+                { new: true, runValidators: true }
+            );
+            return {
+                code: 200
+            }
+        } else if (status === "Rejected") {
+            updatedItem = await register.findOneAndUpdate(
+                { email },
+                { $set: { approval_status: "Rejected", updated_date: Date.now() } },
+                { new: true, runValidators: true }
+            );
+            return {
+                code: 201
+            }
+        }
+
+    } catch (error) {
+        console.log("Internal server error:", error);
+        throw error;
+    }
+};
+
 
 const GetAllRepo = async () => {
     try {
@@ -164,5 +195,5 @@ const SupportRepo = async (data) => {
 
 module.exports = {
     getUserByEmailRepo, RegisterRepo, UpdateStatusRepo, getAdminByEmailRepo, SupportRepo, GetAllRepo, DeleteUserRepo,
-    GetKycRepo
+    GetKycRepo, ApprovalRepo
 }

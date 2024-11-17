@@ -23,6 +23,16 @@ router.get('/get_all_users', isAuthenticate, async (req, res) => {
     }
 })
 
+router.get('/approval', isAuthenticate, async (req, res) => {
+    try {
+        const result = await UserController.ApprovalController(req, res);
+        return result
+    } catch (error) {
+        console.log("error in router " + error)
+        return res.status(400).json({ error: "internal server error router" })
+    }
+})
+
 router.delete('/delete_user', isAuthenticate, async (req, res) => {
     try {
         const result = await UserController.DeleteUserController(req, res);

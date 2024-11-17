@@ -78,6 +78,40 @@ const GetAllService = async (req, res) => {
     }
 }
 
+
+const ApprovalService = async (req, res) => {
+    try {
+        const { status, email } = req.body
+        const data = {
+            status,
+            email
+        }
+        const result = await UserRepo.ApprovalRepo(data)
+        if (result.code == 200) {
+            return res.status(200).json({
+                code: 200,
+                status: "success",
+                message: "Kyc Approved successfully !"
+            })
+
+        }
+        else if (result.code == 201) {
+            return res.status(200).json({
+                code: 200,
+                status: "success",
+                message: "Kyc Rejected successfully !"
+            })
+
+        } else {
+            return res.status(400).json("Status not updated!!")
+        }
+
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error service" })
+    }
+}
+
 const GetKycService = async (req, res) => {
     try {
         const { email } = req.body;
@@ -157,5 +191,6 @@ module.exports = {
     RegisterService,
     SupportService,
     GetAllService, DeleteUserService,
-    GetKycService
+    GetKycService,
+    ApprovalService
 }

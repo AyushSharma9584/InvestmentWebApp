@@ -22,6 +22,17 @@ const GetAllController = async (req, res) => {
     }
 }
 
+
+const ApprovalController = async (req, res) => {
+    try {
+        const result = await UserService.ApprovalService(req, res);
+        return result;
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error controller" })
+    }
+}
+
 const DeleteUserController = async (req, res) => {
     try {
         const result = await UserService.DeleteUserService(req, res);
@@ -58,6 +69,7 @@ module.exports = {
     SupportController,
     GetAllController,
     DeleteUserController,
-    GetKycController
+    GetKycController,
+    ApprovalController
 
 }
