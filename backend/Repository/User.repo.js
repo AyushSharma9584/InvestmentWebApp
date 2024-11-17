@@ -20,7 +20,7 @@ const getUserByEmailRepo = async (email) => {
         }
         else {
             return {
-                message: "user not existed...",
+                message: "user not existedd...",
                 code: 201,
                 data: null
             }
@@ -38,9 +38,11 @@ const getUserByEmailRepo = async (email) => {
 const getAdminByEmailRepo = async (email) => {
     try {
         const em = email.toLowerCase()
+        console.log(em)
         const admin = await Admin.findOne({
             email: em
         })
+        console.log(admin)
         if (admin) {
             return {
                 message: "Admin existed...",
