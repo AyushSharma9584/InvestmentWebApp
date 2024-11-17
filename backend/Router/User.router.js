@@ -23,7 +23,7 @@ router.get('/get_all_users', isAuthenticate, async (req, res) => {
     }
 })
 
-router.get('/approval', isAuthenticate, async (req, res) => {
+router.put('/approval', isAuthenticate, async (req, res) => {
     try {
         const result = await UserController.ApprovalController(req, res);
         return result
