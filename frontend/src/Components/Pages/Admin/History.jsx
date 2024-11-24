@@ -242,7 +242,11 @@ const History = () => {
                                                                     : "border-t"
                                                                 }`}
                                                         >
-                                                            <button onClick={() => OpenPopup(data.email)} className="bg-[#18dae4] text-black font-medium py-1 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95 me-5">
+                                                            <button onClick={() => OpenPopup(data.email)} disabled={data.register_status === false}
+                                                                className={`font-medium py-1 px-4 rounded transition-all active:scale-95 me-5 ${data.register_status === false
+                                                                    ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                                                                    : "bg-[#18dae4] text-black hover:bg-[#0b9198] hover:text-white"
+                                                                    }`}>
                                                                 View
                                                             </button>
                                                         </td>

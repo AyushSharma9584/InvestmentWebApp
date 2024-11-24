@@ -6,17 +6,36 @@ import Wrapper from '../../Wrapper'
 import { ToastContainer, toast } from 'react-toastify';
 
 const Popup = ({ isOpen, setIsOpen, userEmail }) => {
-    const [info, setInfo] = useState([])
+    const [info, setInfo] = useState({
+        name: "",
+        email: "",
+        aadhaar_no: "",
+        pan_no: "",
+        account_no: "",
+        ifsc: "",
+        bank_name: "",
+        upi_no: "",
+        city: "",
+        state: "",
+        pin_code: "",
+        approval_status: ""
+
+    });
+
     useEffect(() => {
-        getAll()
-    }, [])
+        if (isOpen) getAll();
+    }, [isOpen])
 
 
     const getAll = async () => {
         try {
+
             let token = localStorage.getItem('token')
-            console.log(userEmail)
+
             console.log(token)
+            const id = userEmail
+            console.log("Payload being sent:", JSON.stringify({ email: id }));
+            console.log(id)
             if (token) {
                 const result = await fetch(`${import.meta.env.VITE_KEY}user/api/get_kyc`, {
                     method: "Post",
@@ -24,10 +43,10 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
                         'Content-Type': 'application/json',
                         'token': token
                     },
-                    body: JSON.stringify({ email: userEmail })
+                    body: JSON.stringify({ email: id })
                 })
                 const data = await result.json();
-                console.log(data)
+                console.log(data.data)
                 if (data.data.length == 0) {
                     toast.warn("No data found !");
                     return
@@ -71,7 +90,7 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
                                 <div className='md:mt-[38px] md:mb-[30px] md:border-2 md:border-[#18dae4] md:rounded p-[0px] md:p-[20px]'>
                                     <img src="sarte.png" className="w-[110px] h-[110px] m-auto" />
                                     <h3 className="text-3xl font-bold text-center mb-2">
-                                        Registration {userEmail}
+                                        Registration
                                     </h3>
 
 
@@ -82,13 +101,13 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                                                     Name
                                                 </label>
-                                                <input disabled class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" />
+                                                <input value={info.name} disabled class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" />
                                             </div>
                                             <div class="md:w-1/2 px-3">
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
                                                     Email
                                                 </label>
-                                                <input disabled class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" />
+                                                <input value={info.email} disabled class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" />
                                             </div>
                                         </div>
 
@@ -97,7 +116,7 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                                                     Aadhaar number
                                                 </label>
-                                                <input name='aadhar' class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" placeholder="Enter Aadhaar number" />
+                                                <input value={info.aadhaar_no} disabled name='aadhar' class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" placeholder="Enter Aadhaar number" />
 
 
                                             </div>
@@ -105,7 +124,7 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
                                                     PAN number
                                                 </label>
-                                                <input name='pan' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" placeholder="Enter PAN number" />
+                                                <input value={info.pan_no} disabled name='pan' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" placeholder="Enter PAN number" />
 
 
                                             </div>
@@ -116,14 +135,14 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                                                     Account number
                                                 </label>
-                                                <input name='account' class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" placeholder="Enter Account number" />
+                                                <input value={info.account_no} disabled name='account' class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" placeholder="Enter Account number" />
 
                                             </div>
                                             <div class="md:w-1/2 px-3">
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
                                                     IFSC code
                                                 </label>
-                                                <input name='ifsc' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" placeholder="Enter IFSC code" />
+                                                <input value={info.ifsc} disabled name='ifsc' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" placeholder="Enter IFSC code" />
 
                                             </div>
                                         </div>
@@ -133,14 +152,14 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
                                                     Bank name
                                                 </label>
-                                                <input name='bank' class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" placeholder="Enter Bank name" />
+                                                <input value={info.bank_name} disabled name='bank' class=" block text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-first-name" type="text" placeholder="Enter Bank name" />
 
                                             </div>
                                             <div class="md:w-1/2 px-3">
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
                                                     UPI number <span className='ml-3'>(optional)</span>
                                                 </label>
-                                                <input name='upi' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" placeholder="Enter UPI " />
+                                                <input value={info.upi_no} disabled name='upi' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-last-name" type="text" placeholder="Enter UPI " />
 
                                             </div>
                                         </div>
@@ -149,14 +168,14 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
                                                     City
                                                 </label>
-                                                <input name='city' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-city" type="text" placeholder="Enter City" />
+                                                <input value={info.city} disabled name='city' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-city" type="text" placeholder="Enter City" />
 
                                             </div>
                                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
                                                     State
                                                 </label>
-                                                <input name='state' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-city" type="text" placeholder="Enter State" />
+                                                <input value={info.state} disabled name='state' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-city" type="text" placeholder="Enter State" />
 
 
                                             </div>
@@ -164,7 +183,7 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
                                                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
                                                     Pin code
                                                 </label>
-                                                <input name='pin' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-zip" type="text" placeholder="Enter Pin Code" />
+                                                <input value={info.pin_code} disabled name='pin' class="text-black bg-white border border-gray-300 w-full text-[15px] px-4 py-3 rounded-md outline-blue-500" id="grid-zip" type="text" placeholder="Enter Pin Code" />
 
                                             </div>
                                         </div>
