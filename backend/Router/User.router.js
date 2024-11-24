@@ -43,7 +43,7 @@ router.delete('/delete_user', isAuthenticate, async (req, res) => {
     }
 })
 
-router.get('/get_kyc', isAuthenticate, async (req, res) => {
+router.post('/get_kyc', isAuthenticate, async (req, res) => {
     try {
         const result = await UserController.GetKycController(req, res);
         return result

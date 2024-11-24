@@ -15,7 +15,7 @@ const MenuMobile = ({ setMobileMenu }) => {
     else {
       setAdminId("")
     }
-  },)
+  })
 
   const data = [
     { id: 1, name: "Home", url: "/" },

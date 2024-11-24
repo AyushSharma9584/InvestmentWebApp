@@ -15,7 +15,7 @@ const MenuDesktop = () => {
     } else {
       setAdminId("")
     }
-  },)
+  })
 
   const data = [
     { id: 1, name: "Home", url: "/" },
