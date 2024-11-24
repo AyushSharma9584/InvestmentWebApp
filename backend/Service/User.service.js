@@ -115,7 +115,10 @@ const ApprovalService = async (req, res) => {
 const GetKycService = async (req, res) => {
     try {
         const { email } = req.body;
+        console.log(email)
         const result = await UserRepo.GetKycRepo(email)
+        console.log(result)
+        console.log(result.length)
         if (result.length == 0) {
             return res.status(404).send('no data found')
         }

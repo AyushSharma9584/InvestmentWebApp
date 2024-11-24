@@ -15,9 +15,11 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
     const getAll = async () => {
         try {
             let token = localStorage.getItem('token')
+            console.log(userEmail)
+            console.log(token)
             if (token) {
                 const result = await fetch(`${import.meta.env.VITE_KEY}user/api/get_kyc`, {
-                    method: "Get",
+                    method: "Post",
                     headers: {
                         'Content-Type': 'application/json',
                         'token': token
@@ -25,7 +27,6 @@ const Popup = ({ isOpen, setIsOpen, userEmail }) => {
                     body: JSON.stringify({ email: userEmail })
                 })
                 const data = await result.json();
-                console.log(data.data.length)
                 console.log(data)
                 if (data.data.length == 0) {
                     toast.warn("No data found !");
