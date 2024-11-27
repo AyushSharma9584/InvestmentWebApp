@@ -63,7 +63,7 @@ router.post('/support', async (req, res) => {
     }
 })
 
-router.post('/join_getALL', async (req, res) => {
+router.get('/join_getALL', async (req, res) => {
     try {
         const result = await UserController.joinBothController(req, res);
         return result

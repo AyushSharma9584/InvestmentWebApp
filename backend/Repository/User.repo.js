@@ -125,7 +125,7 @@ const joinBothlRepo = async () => {
         const user = await User.aggregate([
             {
                 $lookup: {
-                    from: "registrations", // Ensure the name matches your actual collection in MongoDB
+                    from: "register", // Ensure the name matches your actual collection in MongoDB
                     localField: "email",  // The field from the `User` collection
                     foreignField: "email", // The field from the `Registration` collection
                     as: "registrationDetails", // The name of the array field to store matched documents
@@ -136,6 +136,7 @@ const joinBothlRepo = async () => {
                     _id: 0, // Exclude the `_id` field from the output (optional)
                     name: 1, // Include specific fields from the `User` collection (adjust as needed)
                     email: 1,
+                    register_status: 1,
                     registrationDetails: 1, // Include the joined data
                 }
             }
