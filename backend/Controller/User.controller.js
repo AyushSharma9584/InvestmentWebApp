@@ -63,6 +63,16 @@ const SupportController = async (req, res) => {
     }
 }
 
+const joinBothController = async (req, res) => {
+    try {
+        const result = await UserService.joinBothService(req, res);
+        return result;
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error controller" })
+    }
+}
+
 
 module.exports = {
     RegisterController,
@@ -70,6 +80,7 @@ module.exports = {
     GetAllController,
     DeleteUserController,
     GetKycController,
-    ApprovalController
+    ApprovalController,
+    joinBothController
 
 }

@@ -6,6 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import { ToastContainer, toast } from 'react-toastify';
 import Popup from './Popup';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import DeletePopup from './DeletePopup';
 
 
 
@@ -13,7 +14,9 @@ const History = () => {
     const [key, setKey] = useState("");
     const [info, setInfo] = useState([]);
     const [userId, setUserId] = useState("")
+    const [del, setDel] = useState({ name: "", email: "" })
     const [isOpen, setIsOpen] = useState(false);
+    const [show, setShow] = useState(false)
     const [userEmail, setUserEmail] = useState("")
     const [currentPage, setCurrentPage] = useState(1);
     const RecordsPerPage = 5;
@@ -93,13 +96,18 @@ const History = () => {
         setUserEmail(userEmailId)
 
     }
+    const showPopup = (name, email) => {
+        setShow(true)
+        setDel({ name: name, email: email })
+    }
 
     return (
 
         <div className='mt-[2em]'>
-            {
-                <Popup userEmail={userEmail} isOpen={isOpen} setIsOpen={setIsOpen} />
-            }
+
+            <Popup userEmail={userEmail} isOpen={isOpen} setIsOpen={setIsOpen} />
+            <DeletePopup show={show} setShow={setShow} del={del} />
+
 
             {
                 userId != "6730b71d071d46fd90b2e0f3" ? <h1 style={{ textAlign: "center", color: "white", marginTop: "30px", marginBottom: "30px", fontSize: "25px" }}>You are not allowed to access this route!!</h1> :
@@ -192,7 +200,7 @@ const History = () => {
                                                                     : "border-t"
                                                                 } whitespace-nowrap`}
                                                         >
-                                                            {data?.id}
+                                                            {(currentPage - 1) * RecordsPerPage + index + 1}.
                                                         </td>
                                                         <td
                                                             className={`py-2 px-3 font-normal text-base ${index == 0
@@ -258,7 +266,7 @@ const History = () => {
                                                                     : "border-t"
                                                                 }`}
                                                         >
-                                                            <button className="bg-red-500 text-black font-medium py-1 px-4 rounded transition-all hover:bg-red-600 hover:text-white active:scale-95 me-5">
+                                                            <button onClick={() => showPopup(data.name, data.email)} className="bg-red-500 text-black font-medium py-1 px-4 rounded transition-all hover:bg-red-600 hover:text-white active:scale-95 me-5">
                                                                 Delete
                                                             </button>
                                                         </td>

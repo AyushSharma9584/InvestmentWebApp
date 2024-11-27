@@ -120,6 +120,36 @@ const GetAllRepo = async () => {
     }
 }
 
+const joinBothlRepo = async () => {
+    try {
+        const user = db.User.aggregate([
+            {
+                $lookup: {
+                    from: "registration", // The collection to join
+                    localField: "email",  // The field from the `user` collection
+                    foreignField: "email", // The field from the `registration` collection
+                    as: "registrationDetails" // The name of the array field to store matched documents
+                }
+            },
+            {
+                $project: {
+                    _id: 0, // Exclude the `_id` field from the output (optional)
+                    name: 1, // Include specific fields from the `user` collection (adjust as needed)
+                    email: 1,
+                    registrationDetails: 1 // Include the joined data
+                }
+            }
+        ]);
+        console.log(user)
+        return user
+
+    }
+    catch (error) {
+        console.log("internal server error user", error)
+        throw error;
+    }
+}
+
 const GetKycRepo = async (email) => {
     try {
         const user = await register.findOne({ email: email })
@@ -195,5 +225,5 @@ const SupportRepo = async (data) => {
 
 module.exports = {
     getUserByEmailRepo, RegisterRepo, UpdateStatusRepo, getAdminByEmailRepo, SupportRepo, GetAllRepo, DeleteUserRepo,
-    GetKycRepo, ApprovalRepo
+    GetKycRepo, ApprovalRepo, joinBothlRepo
 }

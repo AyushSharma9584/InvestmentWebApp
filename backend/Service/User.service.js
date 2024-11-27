@@ -79,6 +79,26 @@ const GetAllService = async (req, res) => {
 }
 
 
+const joinBothService = async (req, res) => {
+    try {
+
+        const result = await UserRepo.joinBothlRepo()
+        if (result.length == 0) {
+            return res.status(404).send('no data found')
+        }
+        return res.status(200).json({
+            code: 200,
+            status: "success",
+            message: "data fetched successfully",
+            data: result
+        })
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error service" })
+    }
+}
+
+
 const ApprovalService = async (req, res) => {
     try {
         const { status, email } = req.body
@@ -194,5 +214,6 @@ module.exports = {
     SupportService,
     GetAllService, DeleteUserService,
     GetKycService,
-    ApprovalService
+    ApprovalService,
+    joinBothService
 }
