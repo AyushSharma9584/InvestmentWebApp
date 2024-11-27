@@ -122,30 +122,29 @@ const GetAllRepo = async () => {
 
 const joinBothlRepo = async () => {
     try {
-        const user = db.User.aggregate([
+        const user = await User.aggregate([
             {
                 $lookup: {
-                    from: "registration", // The collection to join
-                    localField: "email",  // The field from the `user` collection
-                    foreignField: "email", // The field from the `registration` collection
-                    as: "registrationDetails" // The name of the array field to store matched documents
+                    from: "registrations", // Ensure the name matches your actual collection in MongoDB
+                    localField: "email",  // The field from the `User` collection
+                    foreignField: "email", // The field from the `Registration` collection
+                    as: "registrationDetails", // The name of the array field to store matched documents
                 }
             },
             {
                 $project: {
                     _id: 0, // Exclude the `_id` field from the output (optional)
-                    name: 1, // Include specific fields from the `user` collection (adjust as needed)
+                    name: 1, // Include specific fields from the `User` collection (adjust as needed)
                     email: 1,
-                    registrationDetails: 1 // Include the joined data
+                    registrationDetails: 1, // Include the joined data
                 }
             }
         ]);
-        console.log(user)
-        return user
 
-    }
-    catch (error) {
-        console.log("internal server error user", error)
+        console.log(user);
+        return user;
+    } catch (error) {
+        console.log("Internal server error in joinBothRepo:", error);
         throw error;
     }
 }
