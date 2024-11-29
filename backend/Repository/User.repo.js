@@ -223,7 +223,36 @@ const SupportRepo = async (data) => {
     }
 }
 
+
+const delSupportRepo = async (id) => {
+    try {
+        let user = await Support.findOne({ _id: id })
+        if (!user) {
+            return false
+        } else {
+            await Support.deleteOne({ _id: id });
+            return true
+        }
+
+    }
+    catch (error) {
+        console.log("internal server error user", error)
+        throw error;
+    }
+}
+
+const AllSupportRepo = async () => {
+    try {
+        const support = await Support.find()
+        return support
+    }
+    catch (error) {
+        console.log("internal server error user", error)
+        throw error;
+    }
+}
+
 module.exports = {
     getUserByEmailRepo, RegisterRepo, UpdateStatusRepo, getAdminByEmailRepo, SupportRepo, GetAllRepo, DeleteUserRepo,
-    GetKycRepo, ApprovalRepo, joinBothlRepo
+    GetKycRepo, ApprovalRepo, joinBothlRepo, AllSupportRepo, delSupportRepo
 }

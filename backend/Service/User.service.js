@@ -209,11 +209,52 @@ const SupportService = async (req, res) => {
 }
 
 
+
+const AllSupportService = async (req, res) => {
+    try {
+
+        const result = await UserRepo.AllSupportRepo()
+        if (result.length == 0) {
+            return res.status(404).send('no data found')
+        }
+        return res.status(200).json({
+            code: 200,
+            status: "success",
+            message: "data fetched successfully",
+            data: result
+        })
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error service" })
+    }
+}
+
+const delSupportService = async (req, res) => {
+    try {
+        const { id } = req.body;
+        const result = await UserRepo.delSupportRepo(id)
+        if (!result) {
+            return res.status(404).send('Something went wrong ! try again later..')
+        }
+        return res.status(200).json({
+            code: 200,
+            status: "success",
+            message: "data deleted successfully !"
+        })
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error service" })
+    }
+}
+
+
 module.exports = {
     RegisterService,
     SupportService,
     GetAllService, DeleteUserService,
     GetKycService,
     ApprovalService,
-    joinBothService
+    joinBothService,
+    AllSupportService,
+    delSupportService
 }

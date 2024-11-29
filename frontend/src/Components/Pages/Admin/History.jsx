@@ -18,6 +18,7 @@ const History = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [show, setShow] = useState(false)
     const [userEmail, setUserEmail] = useState("")
+    const [activeTab, setActiveTab] = useState("User Info");
     const [currentPage, setCurrentPage] = useState(1);
     const RecordsPerPage = 5;
     const lastIndex = currentPage * RecordsPerPage;
@@ -125,7 +126,7 @@ const History = () => {
                                     transition={{ ease: [0.22, 1, 0.36, 1], duration: 1.2 }}
                                 >
                                     {" "}
-                                    <h1>User details</h1>
+                                    {activeTab === "User Info" ? <h1>User details</h1> : <h1>Support</h1>}
                                 </motion.span>
                                 <motion.span
                                     initial={{ width: 0, opacity: 0 }}
@@ -135,28 +136,39 @@ const History = () => {
                                     className="sm:border-2 border-[1.5px] border-[#18dae4] w-0 rounded-md"
                                 ></motion.span>
                             </h1>
-                            {/* <div className='md:mt-[30px] md:mb-[30px] md:border-2 md:border-[#18dae4] md:rounded p-[0px] md:p-[20px]' >
-
-                </div> */}
                             <div>
-                                <ul class="flex flex-wrap text-sm font-medium text-center text-white-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
-                                    <li class="me-2">
-                                        <a href="#" aria-current="page" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">User Info</a>
-                                    </li>
-                                    <li class="me-2">
-                                        <a href="#" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Support</a>
-                                    </li>
 
+                                <ul className="flex flex-wrap text-sm font-medium text-center text-white-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+                                    <li className="me-2">
+                                        <a
+                                            href="#"
+                                            onClick={() => setActiveTab("User Info")}
+                                            className={`inline-block p-4 rounded-t-lg ${activeTab === "User Info"
+                                                ? "text-blue-600 bg-gray-100 dark:bg-gray-800 dark:text-blue-500"
+                                                : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+                                                }`}
+                                        >
+                                            User Info
+                                        </a>
+                                    </li>
+                                    <li className="me-2">
+                                        <a
+                                            href="#"
+                                            onClick={() => setActiveTab("Support")}
+                                            className={`inline-block p-4 rounded-t-lg ${activeTab === "Support"
+                                                ? "text-blue-600 bg-gray-100 dark:bg-gray-800 dark:text-blue-500"
+                                                : "hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+                                                }`}
+                                        >
+                                            Support
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
 
                             <div className=" flex  items-center justify-center pt-10 pb-14">
                                 <div className="w-full  px-2">
-                                    {/* <div>
-                            <h1 className="text-2xl font-medium">
-                                Tailwind Table With Pagination
-                            </h1>
-                        </div> */}
+
                                     <div className="w-full overflow-x-scroll md:overflow-auto  max-w-7xl 2xl:max-w-none ">
                                         <table className="table-auto overflow-scroll md:overflow-auto w-full text-left font-inter border-2 border-[#18dae4] ">
                                             <thead className="rounded-lg text-base text-white font-semibold w-full">

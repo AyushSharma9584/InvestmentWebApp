@@ -63,9 +63,29 @@ const SupportController = async (req, res) => {
     }
 }
 
+const AllSupportController = async (req, res) => {
+    try {
+        const result = await UserService.AllSupportService(req, res);
+        return result;
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error controller" })
+    }
+}
+
 const joinBothController = async (req, res) => {
     try {
         const result = await UserService.joinBothService(req, res);
+        return result;
+
+    } catch (error) {
+        return res.status(400).json({ error: "internal server error controller" })
+    }
+}
+
+const delSupportController = async (req, res) => {
+    try {
+        const result = await UserService.delSupportService(req, res);
         return result;
 
     } catch (error) {
@@ -81,6 +101,8 @@ module.exports = {
     DeleteUserController,
     GetKycController,
     ApprovalController,
-    joinBothController
+    joinBothController,
+    AllSupportController,
+    delSupportController
 
 }

@@ -63,6 +63,26 @@ router.post('/support', async (req, res) => {
     }
 })
 
+router.get('/AllsupportReq', async (req, res) => {
+    try {
+        const result = await UserController.AllSupportController(req, res);
+        return result
+    } catch (error) {
+        console.log("error in router " + error)
+        return res.status(400).json({ error: "internal server error router" })
+    }
+})
+
+router.delete('/deleteSupport', async (req, res) => {
+    try {
+        const result = await UserController.delSupportController(req, res);
+        return result
+    } catch (error) {
+        console.log("error in router " + error)
+        return res.status(400).json({ error: "internal server error router" })
+    }
+})
+
 router.get('/join_getALL', async (req, res) => {
     try {
         const result = await UserController.joinBothController(req, res);
@@ -72,5 +92,7 @@ router.get('/join_getALL', async (req, res) => {
         return res.status(400).json({ error: "internal server error router" })
     }
 })
+
+
 
 module.exports = router;
