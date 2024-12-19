@@ -46,12 +46,12 @@ const Routing = () => {
     <>
       <ScrollToTop />
       <Routes>
-        {/*<Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/products" element={<Products />} />
         <Route path="/contact-us" element={<Contact />} />
-        <Route path="/knowledge" element={<Knowledge />} />*/}
+        <Route path="/knowledge" element={<Knowledge />} />
         {/* <Route path="/create-user" element={<SignUp />} /> */}
         <Route path="/privacy&policy" element={<Privacy />} />
         <Route path="/terms&conditions" element={<Terms />} />
