@@ -87,9 +87,9 @@ const App = () => {
         theme="dark"
       />
 
-      <Menu />
+     <Menu />
       <Routing />
-      <Footer />
+     <Footer />
     </div>
   );
 };
