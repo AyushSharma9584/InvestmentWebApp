@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiAlertCircle } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 import { GoPerson } from "react-icons/go";
@@ -41,6 +41,8 @@ const Menu = () => {
   const loginHandleChange = (e) => {
     setLoginVal({ ...loginVal, [e.target.name]: e.target.value })
   }
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     let val = localStorage.getItem("token")
@@ -159,6 +161,7 @@ const Menu = () => {
     localStorage.removeItem("token");
     toast.success("Logged Out !", { toastId: 'loginsuccess2', });
     setTimeout(() => {
+      navigate("/")
       window.location.reload();
     }, 2100)
 

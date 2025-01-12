@@ -1,8 +1,48 @@
 import { motion } from "framer-motion";
 import Wrapper from "../../Wrapper";
 import { CardRotate } from "../../ui/CardRotate";
+import { jwtDecode } from "jwt-decode";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 const WhyChoose = () => {
+  const navigate = useNavigate()
+  const handleRegister = async () => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      const decoded = jwtDecode(token)
+      let email = decoded.userEmail
+
+      try {
+        const result = await fetch(`${import.meta.env.VITE_KEY}auth/api/getemployee`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email })
+        })
+        const data = await result.json();
+        if (data.data.register_status == false) {
+          navigate('/register')
+        }
+        else {
+          toast.warn("You are already registed !", { toastId: 'regbtn1', });
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    else {
+      toast.warn("Please do signup or login first !", { toastId: 'regbtn', });
+
+    }
+  }
+
+  const getAppLink = () => {
+    window.location.href = "https://srateadmin.in/";
+  }
   return (
     <div className="mt-[5em]">
       <Wrapper>
@@ -45,8 +85,11 @@ const WhyChoose = () => {
             <p>🗸 Ensuring 100% Client Satisfaction</p>
             <p>🗸 We are Fully Bonded and Insured</p>
           </div>
-          <button className="bg-[#18dae4] text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95">
+          <button onClick={handleRegister} className="bg-[#18dae4] text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95">
             Registration
+          </button>
+          <button onClick={getAppLink} className="bg-[#18dae4] ms-4 text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95">
+            Get App
           </button>
         </div>
         <div className="">
@@ -74,8 +117,11 @@ const WhyChoose = () => {
             <p>🗸 Ensuring 100% Client Satisfaction</p>
             <p>🗸 We are Fully Bonded and Insured</p>
           </div>
-          <button className="bg-[#18dae4] text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95">
-            Find a class
+          <button onClick={handleRegister} className="bg-[#18dae4] text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95">
+            Registration
+          </button>
+          <button onClick={getAppLink} className="bg-[#18dae4] ms-4 text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95">
+            Get App
           </button>
         </div>
       </div>

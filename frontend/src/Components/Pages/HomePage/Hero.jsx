@@ -43,6 +43,10 @@ const Hero = () => {
 
     }
   }
+
+  const getAppLink = () => {
+    window.location.href = "https://srateadmin.in/";
+  }
   return (
     <>
       <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto md:mt-0 mt-28">
@@ -61,6 +65,9 @@ const Hero = () => {
           </p>
           <button onClick={handleRegister} className="bg-[#18dae4] text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95">
             Registration
+          </button>
+          <button onClick={getAppLink} className="bg-[#18dae4] ms-4 text-black font-medium py-2 px-4 rounded transition-all hover:bg-[#0b9198] hover:text-white active:scale-95">
+            Get App
           </button>
         </div>
         <ShuffleGrid />
